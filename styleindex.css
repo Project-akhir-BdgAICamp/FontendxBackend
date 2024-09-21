@@ -40,6 +40,15 @@ nav a:hover {
   color: #a04d71;
 }
 
+.header-nav {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+
+
+
 /* Banner style */
 .banner {
   background: url('https://via.placeholder.com/1500x400') center/cover no-repeat;

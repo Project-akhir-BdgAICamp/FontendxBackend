@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Toko Online</title>
+  <title>Register Toko Online</title>
   <style>
-    /* (CSS yang sudah ada) */
     * {
       margin: 0;
       padding: 0;
@@ -24,7 +23,7 @@
       background: linear-gradient(135deg, #6a1b29, #a04d71);
     }
 
-    .login-container {
+    .register-container {
       background-color: white;
       padding: 2rem;
       border-radius: 20px;
@@ -34,7 +33,7 @@
       text-align: center;
     }
 
-    .login-container h2 {
+    .register-container h2 {
       color: #6a1b29;
       margin-bottom: 1.5rem;
       font-size: 2rem;
@@ -77,80 +76,42 @@
       color: #a04d71;
     }
 
-    .login-btn {
+    .register-btn, .back-btn {
       width: 100%;
       padding: 1rem;
-      background-color: #a04d71;
-      color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-size: 1.2rem;
+      margin-top: 1rem;
       transition: background-color 0.3s;
     }
 
-    .login-btn:hover {
+    .register-btn {
+      background-color: #a04d71;
+      color: white;
+    }
+
+    .register-btn:hover {
       background-color: #6a1b29;
     }
 
-    /* Responsif */
-    @media screen and (max-width: 768px) {
-      .login-container {
-        padding: 1.5rem;
-        max-width: 350px;
-      }
-
-      .login-container h2 {
-        font-size: 1.75rem;
-      }
+    .back-btn {
+      background-color: transparent;
+      color: #6a1b29;
+      border: 2px solid #6a1b29; /* Tambahkan border */
     }
 
-    @media screen and (max-width: 480px) {
-      .login-container {
-        padding: 1rem;
-        max-width: 300px;
-      }
-
-      .login-container h2 {
-        font-size: 1.5rem;
-      }
-
-      .login-btn {
-        font-size: 1rem;
-      }
+    .back-btn:hover {
+      background-color: #6a1b29;
+      color: white;
     }
-    
-     .register-container {
-    margin-top: 1.5rem;
-    }
-
-    .register-container p {
-    color: #6a1b29;
-    }
-
-    .google-btn {
-    width: 100%;
-    padding: 1rem;
-    background-color: #ffffff; /* Warna Google */
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    fon
-    transition: background-color 0.3s;
-    }
-
-    .google-btn:hover {
-    background-color: #691515; /* Warna lebih gelap saat hover */
-    }
-
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Login</h2>
-    <form id="loginForm" onsubmit="return handleLogin()">
+  <div class="register-container">
+    <h2>Register</h2>
+    <form id="registerForm" onsubmit="return handleRegister()">
       <div class="input-container">
         <input type="text" id="username" placeholder=" " required>
         <label for="username">Username</label>
@@ -159,23 +120,20 @@
         <input type="password" id="password" placeholder=" " required>
         <label for="password">Password</label>
       </div>
-      <button type="submit" class="login-btn">Login</button>
+      <div class="input-container">
+        <input type="email" id="email" placeholder=" " required>
+        <label for="email">Email</label>
+      </div>
+      <button type="submit" class="register-btn">Register</button>
+      <button type="button" class="back-btn" onclick="window.location.href='login.html'">Kembali</button>
     </form>
-
-    <div class="register-container">
-      <p>Belum punya akun? <a href="register.html">Daftar di sini</a></p>
-    </div>
-    
-    <div class="google-login">
-      <button class="google-btn">Login dengan Google</button>
-    </div>
   </div>
 
   <script>
-    function handleLogin() {
-      localStorage.setItem("isLoggedIn", true); // Simpan status login
-      window.location.href = "index.html"; // Arahkan ke halaman utama
-      return false; // Mencegah reload halaman
+    function handleRegister() {
+      alert("Registrasi berhasil!");
+      window.location.href = "login.html";
+      return false;
     }
   </script>
 </body>
