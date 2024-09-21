@@ -1,77 +1,136 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Index Sederhana</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #4CAF50;
-            padding: 20px;
-            text-align: center;
-            color: white;
-        }
-        nav {
-            margin: 20px;
-            text-align: center;
-        }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #4CAF50;
-        }
-        nav a:hover {
-            color: #333;
-        }
-        footer {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage - Toko Online</title>
+  <link rel="stylesheet" href="styleindex.css">
+  <script>
+    // Cek apakah user sudah login, kalau belum redirect ke login.html
+    if (!localStorage.getItem("isLoggedIn")) {
+      window.location.href = "login.html";
+    }
+
+    // Fungsi untuk toggle (buka/tutup) side menu
+    function toggleMenu() {
+      const menu = document.getElementById('sideMenu');
+      menu.classList.toggle('open');
+    }
+  </script>
 </head>
 <body>
 
-    <header>
-        <h1>Selamat Datang di Halaman Index</h1>
-    </header>
+  <!-- Tombol menu -->
+  <button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
 
-    <nav>
-        <a href="#beranda">Beranda</a>
-        <a href="#tentang">Tentang</a>
-        <a href="#kontak">Kontak</a>
-    </nav>
+  <!-- Side menu -->
+  <div id="sideMenu" class="side-menu">
+    <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
+    <a href="#">Home</a>
+    <a href="#">Baju</a>
+    <a href="#">Sepatu</a>
+    <a href="#">Tas</a>
+    <a href="#">Semua Produk</a>
+  </div>
 
-    <section id="beranda">
-        <h2>Beranda</h2>
-        <p>Ini adalah bagian beranda.</p>
-    </section>
+  <header>
+    <h1>Toko Online</h1>
+  </header>
 
-    <section id="tentang">
-        <h2>Tentang</h2>
-        <p>Ini adalah bagian tentang kami.</p>
-    </section>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Baju</a>
+    <a href="#">Sepatu</a>
+    <a href="#">Tas</a>
+    <a href="#">Semua Produk</a>
+  </nav>
 
-    <section id="kontak">
-        <h2>Kontak</h2>
-        <p>Ini adalah bagian kontak kami.</p>
-    </section>
+  <div class="banner">
+    <h1>Diskon Hingga 50%! Dapatkan Penawaran Terbaik Sekarang!</h1>
+  </div>
 
-    <footer>
-        <p>Hak Cipta © 2024. Semua hak dilindungi.</p>
-    </footer>
+  <section class="search-filter">
+    <div class="search-container">
+      <input type="text" placeholder="Cari produk..." class="search-input">
+      <button class="search-button">🔍 Cari</button>
+    </div>
+    
+    <div class="filter-container">
+      <h3>Filter Berdasarkan:</h3>
+      <div class="filter-category">
+        <label for="category">Kategori:</label>
+        <select id="category">
+          <option value="all">Semua</option>
+          <option value="baju">Baju</option>
+          <option value="sepatu">Sepatu</option>
+          <option value="tas">Tas</option>
+        </select>
+      </div>
+      <div class="filter-price">
+        <label for="price">Harga:</label>
+        <input type="range" id="price" min="0" max="1000000" value="500000">
+        <span>Rp 0 - Rp 1.000.000</span>
+      </div>
+      <div class="filter-size">
+        <label for="size">Ukuran:</label>
+        <select id="size">
+          <option value="all">Semua</option>
+          <option value="s">S</option>
+          <option value="m">M</option>
+          <option value="l">L</option>
+        </select>
+      </div>
+      <div class="filter-brand">
+        <label for="brand">Merek:</label>
+        <select id="brand">
+          <option value="all">Semua</option>
+          <option value="brandA">Merek A</option>
+          <option value="brandB">Merek B</option>
+        </select>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="categories">
+    <div class="category">
+      <img src="https://via.placeholder.com/100" alt="Baju">
+      <h3>Baju</h3>
+    </div>
+    <div class="category">
+      <img src="https://via.placeholder.com/100" alt="Sepatu">
+      <h3>Sepatu</h3>
+    </div>
+    <div class="category">
+      <img src="https://via.placeholder.com/100" alt="Tas">
+      <h3>Tas</h3>
+    </div>
+  </section>
+
+  <section class="featured-products">
+    <h2>Produk Unggulan</h2>
+    <div class="product-list">
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Produk 1">
+        <h4>Produk 1</h4>
+        <p>Rp 200.000</p>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Produk 2">
+        <h4>Produk 2</h4>
+        <p>Rp 300.000</p>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200" alt="Produk 3">
+        <h4>Produk 3</h4>
+        <p>Rp 250.000</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Toko Online. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
