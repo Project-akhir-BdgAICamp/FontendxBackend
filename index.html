@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage - Toko Online</title>
-  <link rel="stylesheet" href="styleindex.css">
-  <script>
-    // Cek apakah user sudah login, kalau belum redirect ke login.html
-    if (!localStorage.getItem("isLoggedIn")) {
-      window.location.href = "login.html";
-    }
-
-    // Fungsi untuk toggle (buka/tutup) side menu
-    function toggleMenu() {
-      const menu = document.getElementById('sideMenu');
-      menu.classList.toggle('open');
-    }
-  </script>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - Toko Online</title>
+    <link rel="stylesheet" href="styleindex.css">
+    <link rel="icon" href="glamoras.jpg" type="image/jpeg"> <!-- Tambahkan ini -->
+    <script>
+      // Cek apakah user sudah login, kalau belum redirect ke login.html
+      if (!localStorage.getItem("isLoggedIn")) {
+        window.location.href = "login.html";
+      }
+  
+      // Fungsi untuk toggle (buka/tutup) side menu
+      function toggleMenu() {
+        const menu = document.getElementById('sideMenu');
+        menu.classList.toggle('open');
+      }
+    </script>
+  </head>
+  
 <body>
 
   <!-- Tombol menu -->
@@ -99,7 +101,7 @@
 
   <section class="categories">
     <div class="category">
-      <img src="https://via.placeholder.com/100" alt="Baju">
+      <img src="baju.jpg" alt="Baju">
       <h3>Baju</h3>
     </div>
     <div class="category">

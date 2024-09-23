@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="glamora.jpg" type="image/jpeg"> <!-- Ganti dengan glamora.jpg -->
   <title>Register Toko Online</title>
   <style>
     * {
@@ -37,6 +38,10 @@
       color: #6a1b29;
       margin-bottom: 1.5rem;
       font-size: 2rem;
+    }
+
+    .logo {
+      margin-bottom: 1rem;
     }
 
     .input-container {
@@ -103,10 +108,36 @@
     .login-link:hover {
       text-decoration: underline;
     }
+
+    /* Responsif */
+    @media screen and (max-width: 768px) {
+      .register-container {
+        padding: 1.5rem;
+      }
+
+      .register-container h2 {
+        font-size: 1.75rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .register-container {
+        padding: 1rem;
+      }
+
+      .register-container h2 {
+        font-size: 1.5rem;
+      }
+
+      .register-btn {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="register-container">
+    <img src="glamora.jpg" alt="Logo" class="logo" style="width: 100px; height: auto;"> <!-- Logo -->
     <h2>Register</h2>
     <form id="registerForm" onsubmit="return handleRegister()">
       <div class="input-container">
@@ -124,7 +155,6 @@
       <button type="submit" class="register-btn">Register</button>
     </form>
 
-    <!-- Tambahkan tombol untuk login jika sudah pernah registrasi -->
     <a href="login.html" class="login-link">Sudah punya akun? Login di sini</a>
   </div>
 
@@ -136,4 +166,4 @@
     }
   </script>
 </body>
-</html> 
+</html>
