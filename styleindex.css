@@ -270,11 +270,15 @@ select, input[type="range"] {
 }
 
 input[type="range"] {
-  -webkit-appearance: none; /* Menyembunyikan default style */
+  -webkit-appearance: none; /* Untuk Safari dan Chrome */
+  -moz-appearance: none; /* Untuk Firefox */
+  appearance: none; /* Standar */
+  
   height: 5px;
   background: #ddd;
   border-radius: 5px;
 }
+
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;

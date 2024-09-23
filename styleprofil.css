@@ -41,6 +41,22 @@ body {
     display: block;
     margin: 10px 0 5px;
   }
+
+  .back-button {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #a04d71;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .back-button:hover {
+    background-color: #6a1b29;
+  }
+  
   
   input[type="text"], input[type="email"] {
     width: 100%;
