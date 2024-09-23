@@ -76,35 +76,32 @@
       color: #a04d71;
     }
 
-    .register-btn, .back-btn {
+    .register-btn {
       width: 100%;
       padding: 1rem;
+      background-color: #a04d71;
+      color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-size: 1.2rem;
-      margin-top: 1rem;
       transition: background-color 0.3s;
-    }
-
-    .register-btn {
-      background-color: #a04d71;
-      color: white;
     }
 
     .register-btn:hover {
       background-color: #6a1b29;
     }
 
-    .back-btn {
-      background-color: transparent;
+    .login-link {
+      margin-top: 1rem;
       color: #6a1b29;
-      border: 2px solid #6a1b29; /* Tambahkan border */
+      font-size: 1rem;
+      display: block;
+      text-decoration: none;
     }
 
-    .back-btn:hover {
-      background-color: #6a1b29;
-      color: white;
+    .login-link:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -125,8 +122,10 @@
         <label for="email">Email</label>
       </div>
       <button type="submit" class="register-btn">Register</button>
-      <button type="button" class="back-btn" onclick="window.location.href='login.html'">Kembali</button>
     </form>
+
+    <!-- Tambahkan tombol untuk login jika sudah pernah registrasi -->
+    <a href="login.html" class="login-link">Sudah punya akun? Login di sini</a>
   </div>
 
   <script>
