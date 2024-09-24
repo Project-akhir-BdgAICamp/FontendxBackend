@@ -6,7 +6,7 @@
   <link rel="icon" href="glamoras.jpg" type="image/jpeg">
   <title>Detail Produk - Toko Online</title>
   <link rel="stylesheet" href="styleindex.css">
-  <link rel="stylesheet" href="detail-produk.css"> <!-- Link ke file CSS -->
+  <link rel="stylesheet" href="detail-produk.css">
 </head>
 <body>
   <header>
@@ -18,7 +18,7 @@
     <a href="baju.html">Baju</a>
     <a href="sepatu.html">Sepatu</a>
     <a href="tas.html">Tas</a>
-    <a href="#">Semua Produk</a>
+    <a href="semuaproduk.html">Semua Produk</a>
   </nav>
 
   <section class="product-detail" id="productDetail">
@@ -37,10 +37,11 @@
     }
 
     // Ambil nama produk dari parameter
-    const produk = getQueryParameter('produk');
+    const produk = getQueryParameter('produk'); // Ganti 'product' ke 'produk'
 
-    // Data produk (baju dan sepatu)
+    // Data produk (baju, sepatu, dan tas)
     const products = {
+      // Data Baju
       "kemeja-formal-cowok": {
         image: "baju-cowok1.jpg",
         title: "Kemeja Formal Cowok",
@@ -77,6 +78,7 @@
         description: "Cardigan yang nyaman untuk digunakan di berbagai suasana.",
         price: "Rp 250.000",
       },
+      // Data Sepatu
       "sepatu-sneakers-cowok": {
         image: "sepatu-cowok1.jpg",
         title: "Sepatu Sneakers Cowok",
@@ -112,6 +114,43 @@
         title: "Sepatu Sneakers Cewek",
         description: "Sepatu sneakers modis yang cocok untuk gaya santai.",
         price: "Rp 550.000",
+      },
+      // Data Tas
+      "tas-ransel-cowok": {
+        image: "tas-cowok1.jpg",
+        title: "Tas Ransel Cowok",
+        description: "Tas ransel yang stylish dan cocok untuk aktivitas sehari-hari.",
+        price: "Rp 350.000",
+      },
+      "tas-selempang-cowok": {
+        image: "tas-cowok2.jpg",
+        title: "Tas Selempang Cowok",
+        description: "Tas selempang yang praktis dan nyaman untuk dibawa kemana saja.",
+        price: "Rp 250.000",
+      },
+      "tas-gym-cowok": {
+        image: "tas-cowok3.jpg",
+        title: "Tas Gym Cowok",
+        description: "Tas gym yang dirancang untuk menyimpan perlengkapan olahraga.",
+        price: "Rp 450.000",
+      },
+      "tas-tote-cewek": {
+        image: "tas-cewek1.jpg",
+        title: "Tas Tote Cewek",
+        description: "Tas tote yang elegan dan cocok untuk berbagai acara.",
+        price: "Rp 300.000",
+      },
+      "tas-punggung-cewek": {
+        image: "tas-cewek2.jpg",
+        title: "Tas Punggung Cewek",
+        description: "Tas punggung yang stylish dan nyaman untuk penggunaan sehari-hari.",
+        price: "Rp 400.000",
+      },
+      "tas-clutch-cewek": {
+        image: "tas-cewek3.jpg",
+        title: "Tas Clutch Cewek",
+        description: "Tas clutch yang sempurna untuk acara malam dan pesta.",
+        price: "Rp 250.000",
       },
     };
 
