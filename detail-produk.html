@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="glamoras.jpg" type="image/jpeg">
+  <title>Detail Produk - Toko Online</title>
+  <link rel="stylesheet" href="styleindex.css">
+  <link rel="stylesheet" href="detail-produk.css"> <!-- Link ke file CSS -->
+</head>
+<body>
+  <header>
+    <h1>Detail Produk</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="baju.html">Baju</a>
+    <a href="sepatu.html">Sepatu</a>
+    <a href="tas.html">Tas</a>
+    <a href="#">Semua Produk</a>
+  </nav>
+
+  <section class="product-detail" id="productDetail">
+    <!-- Detail produk akan ditampilkan di sini -->
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Toko Online. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Fungsi untuk mendapatkan parameter dari URL
+    function getQueryParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // Ambil nama produk dari parameter
+    const produk = getQueryParameter('produk');
+
+    // Data produk (baju dan sepatu)
+    const products = {
+      "kemeja-formal-cowok": {
+        image: "baju-cowok1.jpg",
+        title: "Kemeja Formal Cowok",
+        description: "Kemeja formal yang cocok untuk acara formal dan semi-formal. Terbuat dari bahan berkualitas, nyaman digunakan sepanjang hari.",
+        price: "Rp 250.000",
+      },
+      "kaos-santai-cowok": {
+        image: "baju-cowok2.jpg",
+        title: "Kaos Santai Cowok",
+        description: "Kaos santai yang nyaman untuk digunakan sehari-hari. Tersedia dalam berbagai ukuran.",
+        price: "Rp 100.000",
+      },
+      "jaket-kulit-cowok": {
+        image: "baju-cowok3.jpg",
+        title: "Jaket Kulit Cowok",
+        description: "Jaket kulit berkualitas tinggi yang memberikan gaya dan kehangatan.",
+        price: "Rp 400.000",
+      },
+      "dress-kasual-cewek": {
+        image: "baju-cewek1.jpg",
+        title: "Dress Kasual Cewek",
+        description: "Dress kasual yang cocok untuk berbagai acara santai.",
+        price: "Rp 300.000",
+      },
+      "blouse-cewek": {
+        image: "baju-cewek2.jpg",
+        title: "Blouse Cewek",
+        description: "Blouse elegan yang cocok untuk tampilan sehari-hari.",
+        price: "Rp 200.000",
+      },
+      "cardigan-cewek": {
+        image: "baju-cewek3.jpg",
+        title: "Cardigan Cewek",
+        description: "Cardigan yang nyaman untuk digunakan di berbagai suasana.",
+        price: "Rp 250.000",
+      },
+      "sepatu-sneakers-cowok": {
+        image: "sepatu-cowok1.jpg",
+        title: "Sepatu Sneakers Cowok",
+        description: "Sepatu sneakers yang stylish dan nyaman untuk kegiatan sehari-hari.",
+        price: "Rp 500.000",
+      },
+      "sepatu-formal-cowok": {
+        image: "sepatu-cowok2.jpg",
+        title: "Sepatu Formal Cowok",
+        description: "Sepatu formal yang cocok untuk acara resmi dan pernikahan.",
+        price: "Rp 600.000",
+      },
+      "sepatu-olahraga-cowok": {
+        image: "sepatu-cowok3.jpg",
+        title: "Sepatu Olahraga Cowok",
+        description: "Sepatu yang dirancang khusus untuk aktivitas olahraga dan kebugaran.",
+        price: "Rp 700.000",
+      },
+      "sepatu-heels-cewek": {
+        image: "sepatu-cewek1.jpg",
+        title: "Sepatu Heels Cewek",
+        description: "Sepatu heels yang elegan untuk acara formal dan pesta.",
+        price: "Rp 450.000",
+      },
+      "sepatu-casual-cewek": {
+        image: "sepatu-cewek2.jpg",
+        title: "Sepatu Casual Cewek",
+        description: "Sepatu casual yang nyaman dan trendy untuk penggunaan sehari-hari.",
+        price: "Rp 350.000",
+      },
+      "sepatu-sneakers-cewek": {
+        image: "sepatu-cewek3.jpg",
+        title: "Sepatu Sneakers Cewek",
+        description: "Sepatu sneakers modis yang cocok untuk gaya santai.",
+        price: "Rp 550.000",
+      },
+    };
+
+    // Menampilkan detail produk berdasarkan nama produk
+    const productDetailDiv = document.getElementById('productDetail');
+
+    if (produk && products[produk]) {
+      const product = products[produk];
+      productDetailDiv.innerHTML = `
+        <div class="product-image">
+          <img src="${product.image}" alt="${product.title}">
+        </div>
+
+        <div class="product-info">
+          <h2>${product.title}</h2>
+          <p class="description">${product.description}</p>
+          <p class="price">${product.price}</p>
+          
+          <div class="product-options">
+            <div class="size">
+              <label for="size">Ukuran:</label>
+              <select id="size">
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+              </select>
+            </div>
+
+            <div class="color">
+              <label for="color">Warna:</label>
+              <select id="color">
+                <option value="Putih">Putih</option>
+                <option value="Hitam">Hitam</option>
+                <option value="Abu-abu">Abu-abu</option>
+              </select>
+            </div>
+
+            <div class="quantity">
+              <label for="quantity">Jumlah:</label>
+              <input type="number" id="quantity" min="1" value="1">
+            </div>
+
+            <div class="stock">
+              <p>Ketersediaan: <span class="available">Tersedia</span></p>
+            </div>
+          </div>
+
+          <div class="product-actions">
+            <button class="cart-btn">Tambahkan ke Keranjang</button>
+            <button class="wishlist-btn">Tambahkan ke Wishlist</button>
+          </div>
+        </div>
+      `;
+    } else {
+      productDetailDiv.innerHTML = `<p>Produk tidak ditemukan.</p>`;
+    }
+  </script>
+
+</body>
+</html>
