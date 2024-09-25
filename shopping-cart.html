@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styleshopping.css">
+  <title>Keranjang Belanja</title>
+</head>
+<body>
+  <header>
+    <h1>Keranjang Belanja</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="baju.html">Baju</a>
+    <a href="sepatu.html">Sepatu</a>
+    <a href="tas.html">Tas</a>
+    <a href="semuaproduk.html">Semua Produk</a>
+  </nav>
+
+  <section class="cart-container">
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Produk</th>
+          <th>Harga</th>
+          <th>Jumlah</th>
+          <th>Total</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="cartItems">
+      </tbody>
+    </table>
+  </section>
+
+  <section class="cart-summary">
+    <h2>Ringkasan Keranjang</h2>
+    <p>Total Produk: <span id="totalItems">0</span></p>
+    <p>Total Harga: <span id="totalPrice">Rp 0</span></p>
+    <button class="checkout-btn">Checkout</button>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Glamora. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function getCartData() {
+      return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    function updateCart() {
+      const cartData = getCartData();
+      const cartItems = document.getElementById('cartItems');
+      const totalItems = document.getElementById('totalItems');
+      const totalPrice = document.getElementById('totalPrice');
+      let totalItemCount = 0;
+      let totalItemPrice = 0;
+
+      cartItems.innerHTML = '';
+
+      cartData.forEach((item, index) => {
+        if (item.price && item.quantity) {
+          const priceNumber = parseFloat(item.price.replace(/[Rp. ]/g, '').replace(',', '.'));
+          const totalItem = priceNumber * item.quantity;
+          totalItemCount += item.quantity;
+          totalItemPrice += totalItem;
+
+          cartItems.innerHTML += `
+            <tr>
+              <td>
+                <img src="${item.image}" alt="${item.title}" class="product-image">
+                <span>${item.title}</span>
+              </td>
+              <td>Rp ${priceNumber.toLocaleString()}</td>
+              <td>
+                <input type="number" min="1" value="${item.quantity}" onchange="changeQuantity(${index}, this.value)">
+              </td>
+              <td>Rp ${totalItem.toLocaleString()}</td>
+              <td>
+                <button onclick="removeItem(${index})">Hapus</button>
+              </td>
+            </tr>
+          `;
+        }
+      });
+
+      totalItems.innerText = totalItemCount;
+      totalPrice.innerText = `Rp ${totalItemPrice.toLocaleString()}`;
+    }
+
+    function changeQuantity(index, newQuantity) {
+      const cartData = getCartData();
+      if (newQuantity < 1) {
+        newQuantity = 1;
+      }
+      cartData[index].quantity = parseInt(newQuantity);
+      localStorage.setItem('cart', JSON.stringify(cartData));
+      updateCart();
+    }
+
+    function removeItem(index) {
+      const cartData = getCartData();
+      cartData.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cartData));
+      updateCart();
+    }
+
+    updateCart();
+  </script>
+</body>
+</html>
