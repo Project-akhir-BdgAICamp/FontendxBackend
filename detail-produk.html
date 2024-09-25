@@ -22,26 +22,21 @@
   </nav>
 
   <section class="product-detail" id="productDetail">
-    <!-- Detail produk akan ditampilkan di sini -->
   </section>
 
   <footer>
-    <p>&copy; 2024 Toko Online. All rights reserved.</p>
+    <p>&copy; 2024 Glamora. All rights reserved.</p>
   </footer>
 
   <script>
-    // Fungsi untuk mendapatkan parameter dari URL
     function getQueryParameter(name) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name);
     }
 
-    // Ambil nama produk dari parameter
-    const produk = getQueryParameter('produk'); // Ganti 'product' ke 'produk'
+    const produk = getQueryParameter('produk');
 
-    // Data produk (baju, sepatu, dan tas)
     const products = {
-      // Data Baju
       "kemeja-formal-cowok": {
         image: "baju-cowok1.jpg",
         title: "Kemeja Formal Cowok",
@@ -78,7 +73,6 @@
         description: "Cardigan yang nyaman untuk digunakan di berbagai suasana.",
         price: "Rp 250.000",
       },
-      // Data Sepatu
       "sepatu-sneakers-cowok": {
         image: "sepatu-cowok1.jpg",
         title: "Sepatu Sneakers Cowok",
@@ -115,7 +109,6 @@
         description: "Sepatu sneakers modis yang cocok untuk gaya santai.",
         price: "Rp 550.000",
       },
-      // Data Tas
       "tas-ransel-cowok": {
         image: "tas-cowok1.jpg",
         title: "Tas Ransel Cowok",
@@ -154,7 +147,6 @@
       },
     };
 
-    // Menampilkan detail produk berdasarkan nama produk
     const productDetailDiv = document.getElementById('productDetail');
 
     if (produk && products[produk]) {
@@ -200,13 +192,39 @@
           </div>
 
           <div class="product-actions">
-            <button class="cart-btn">Tambahkan ke Keranjang</button>
+            <button class="cart-btn" onclick="addToCart('${produk}')">Tambahkan ke Keranjang</button>
             <button class="wishlist-btn">Tambahkan ke Wishlist</button>
           </div>
         </div>
       `;
     } else {
       productDetailDiv.innerHTML = `<p>Produk tidak ditemukan.</p>`;
+    }
+
+    function addToCart(productId) {
+      const product = products[productId];
+      const quantity = document.getElementById('quantity').value;
+      
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      const existingProductIndex = cart.findIndex(item => item.title === product.title);
+
+      if (existingProductIndex > -1) {
+        cart[existingProductIndex].quantity += parseInt(quantity);
+      } else {
+        cart.push({
+          title: product.title,
+          price: product.price,
+          quantity: parseInt(quantity),
+          size: document.getElementById('size').value,
+          color: document.getElementById('color').value,
+        });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      alert(`${product.title} telah ditambahkan ke keranjang!`);
+      window.location.href = "shopping-cart.html";
     }
   </script>
 
