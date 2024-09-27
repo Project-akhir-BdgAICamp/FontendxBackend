@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylecheckout.css">
+  <title>Checkout</title>
+</head>
+<body>
+  <header>
+    <h1>Checkout</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="baju.html">Baju</a>
+    <a href="sepatu.html">Sepatu</a>
+    <a href="tas.html">Tas</a>
+    <a href="semuaproduk.html">Semua Produk</a>
+  </nav>
+  <section class="checkout-container">
+    <form id="checkoutForm" onsubmit="handleCheckout(event)">
+      <h2>Detail Pengiriman</h2>
+      <label for="name">Nama:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="address">Alamat:</label>
+      <textarea id="address" name="address" required></textarea>
+
+      <label for="phone">Nomor Telepon:</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <h2>Pilih Metode Pengiriman</h2>
+      <label>
+        <input type="radio" name="shipping" value="Reguler" checked> Reguler
+      </label>
+      <label>
+        <input type="radio" name="shipping" value="Ekspres"> Ekspres
+      </label>
+
+      <h2>Pilih Metode Pembayaran</h2>
+      <label>
+        <input type="radio" name="payment" value="Transfer Bank" checked> Transfer Bank
+      </label>
+      <label>
+        <input type="radio" name="payment" value="E-Wallet"> E-Wallet
+      </label>
+      <label>
+        <input type="radio" name="payment" value="Kartu Kredit"> Kartu Kredit
+      </label>
+
+      <button type="submit" class="checkout-btn">Konfirmasi Pesanan</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Glamora. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function getCartData() {
+      return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    function handleCheckout(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const shippingData = {
+        name: formData.get('name'),
+        address: formData.get('address'),
+        phone: formData.get('phone'),
+        shippingMethod: formData.get('shipping'),
+        paymentMethod: formData.get('payment'),
+      };
+      
+      localStorage.setItem('shippingData', JSON.stringify(shippingData));
+      window.location.href = 'confirmation.html';
+    }
+  </script>
+</body>
+</html>

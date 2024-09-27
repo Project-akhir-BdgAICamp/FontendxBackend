@@ -40,7 +40,8 @@
     <h2>Ringkasan Keranjang</h2>
     <p>Total Produk: <span id="totalItems">0</span></p>
     <p>Total Harga: <span id="totalPrice">Rp 0</span></p>
-    <button class="checkout-btn">Checkout</button>
+    <button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
+
   </section>
 
   <footer>
@@ -53,44 +54,47 @@
     }
 
     function updateCart() {
-      const cartData = getCartData();
-      const cartItems = document.getElementById('cartItems');
-      const totalItems = document.getElementById('totalItems');
-      const totalPrice = document.getElementById('totalPrice');
-      let totalItemCount = 0;
-      let totalItemPrice = 0;
+  const cartData = getCartData();
+  const cartItems = document.getElementById('cartItems');
+  const totalItems = document.getElementById('totalItems');
+  const totalPrice = document.getElementById('totalPrice');
+  let totalItemCount = 0;
+  let totalItemPrice = 0;
 
-      cartItems.innerHTML = '';
+  cartItems.innerHTML = '';
 
-      cartData.forEach((item, index) => {
-        if (item.price && item.quantity) {
-          const priceNumber = parseFloat(item.price.replace(/[Rp. ]/g, '').replace(',', '.'));
-          const totalItem = priceNumber * item.quantity;
-          totalItemCount += item.quantity;
-          totalItemPrice += totalItem;
+  if (cartData.length === 0) {
+    cartItems.innerHTML = '<tr><td colspan="5">Keranjang kosong</td></tr>';
+  } else {
+    cartData.forEach((item, index) => {
+      const priceNumber = parseFloat(item.price.replace(/[Rp. ]/g, '').replace(',', '.'));
+      const totalItem = priceNumber * item.quantity;
+      totalItemCount += item.quantity;
+      totalItemPrice += totalItem;
 
-          cartItems.innerHTML += `
-            <tr>
-              <td>
-                <img src="${item.image}" alt="${item.title}" class="product-image">
-                <span>${item.title}</span>
-              </td>
-              <td>Rp ${priceNumber.toLocaleString()}</td>
-              <td>
-                <input type="number" min="1" value="${item.quantity}" onchange="changeQuantity(${index}, this.value)">
-              </td>
-              <td>Rp ${totalItem.toLocaleString()}</td>
-              <td>
-                <button onclick="removeItem(${index})">Hapus</button>
-              </td>
-            </tr>
-          `;
-        }
-      });
+      cartItems.innerHTML += `
+        <tr>
+          <td>
+            <img src="${item.image}" alt="${item.title}" class="product-image">
+            <span>${item.title}</span>
+          </td>
+          <td>Rp ${priceNumber.toLocaleString()}</td>
+          <td>
+            <input type="number" min="1" value="${item.quantity}" onchange="changeQuantity(${index}, this.value)">
+          </td>
+          <td>Rp ${totalItem.toLocaleString()}</td>
+          <td>
+            <button onclick="removeItem(${index})">Hapus</button>
+          </td>
+        </tr>
+      `;
+    });
+  }
 
-      totalItems.innerText = totalItemCount;
-      totalPrice.innerText = `Rp ${totalItemPrice.toLocaleString()}`;
-    }
+  totalItems.innerText = totalItemCount;
+  totalPrice.innerText = `Rp ${totalItemPrice.toLocaleString()}`;
+}
+
 
     function changeQuantity(index, newQuantity) {
       const cartData = getCartData();
@@ -110,6 +114,12 @@
     }
 
     updateCart();
+
+    function goToCheckout() {
+      window.location.href = 'checkout.html';
+    }
+
+
   </script>
 </body>
 </html>
