@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylereviewconfirmation.css">
+  <title>Konfirmasi Ulasan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>Terima Kasih atas Ulasan Anda!</h1>
+  </header>
+
+  <section class="confirmation-container">
+    <div class="checkmark">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <h2>Ulasan Anda Telah Dikirim!</h2>
+    <p>Terima kasih telah meluangkan waktu untuk memberikan ulasan. Ulasan Anda sangat berarti bagi kami dan pelanggan lainnya.</p>
+    
+    <p><strong>Nomor Pesanan:</strong> <span id="orderNumber"></span></p>
+    <p><strong>Produk yang Diulas:</strong> <span id="product"></span></p>
+    <p><strong>Rating:</strong> <span id="rating"></span></p>
+    <p><strong>Ulasan Anda:</strong> <span id="review"></span></p>
+
+    <a href="index.html" class="continue-btn">Kembali ke Beranda</a>
+    <a href="semuaproduk.html" class="continue-btn">Lihat Semua Produk</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Glamora. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function getQueryParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const regex = /([^&=]+)=([^&]*)/g;
+      let m;
+
+      while (m = regex.exec(queryString)) {
+        params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+      }
+      return params;
+    }
+
+    window.onload = function() {
+      const params = getQueryParams();
+      document.getElementById('orderNumber').innerText = params.orderNumber || 'Tidak ada data';
+      const productName = (params.product || 'Tidak ada data').replace(/\+/g, ' ');
+      document.getElementById('product').innerText = productName;
+      document.getElementById('rating').innerText = params.rating || 'Tidak ada data';
+      document.getElementById('review').innerText = params.review || 'Tidak ada data';
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #6a1b29, #a04d71);
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .confirmation-container {
+      background-color: #fff;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .checkmark {
+      font-size: 4rem;
+      color: #6a1b29;
+      margin-bottom: 20px;
+    }
+
+    .continue-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #6a1b29;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .continue-btn:hover {
+      background-color: #a04d71;
+    }
+
+    footer {
+      background-color: #6a1b29;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</body>
+</html>

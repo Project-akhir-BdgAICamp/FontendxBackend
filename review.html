@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylereview.css">
+  <title>Review Produk</title>
+</head>
+<body>
+  <header>
+    <h1>Review Produk</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="baju.html">Baju</a>
+    <a href="sepatu.html">Sepatu</a>
+    <a href="tas.html">Tas</a>
+    <a href="semuaproduk.html">Semua Produk</a>
+  </nav>
+
+  <section class="review-container">
+    <h2>Berikan Ulasan Anda</h2>
+    <form id="reviewForm" action="review-confirmation.html" method="GET">
+      <label for="orderNumber">Nomor Pesanan:</label>
+      <input type="text" id="orderNumber" name="orderNumber" value="#123456789" readonly>
+
+      <label for="product">Produk yang Diulas:</label>
+      <select id="product" name="product"></select>
+
+      <label for="rating">Rating:</label>
+      <select id="rating" name="rating">
+        <option value="1">1 - Sangat Buruk</option>
+        <option value="2">2 - Buruk</option>
+        <option value="3">3 - Cukup</option>
+        <option value="4">4 - Baik</option>
+        <option value="5">5 - Sangat Baik</option>
+      </select>
+
+      <label for="review">Ulasan Anda:</label>
+      <textarea id="review" name="review" rows="5" placeholder="Tulis ulasan Anda di sini..." required></textarea>
+
+      <button type="submit" class="submit-btn">Kirim Ulasan</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Glamora. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function loadPurchasedProducts() {
+      const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+      const productSelect = document.getElementById('product');
+      productSelect.innerHTML = '';
+
+      if (cartData.length === 0) {
+        productSelect.innerHTML = '<option>Tidak ada produk di keranjang</option>';
+      } else {
+        cartData.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item.title;
+          option.text = item.title;
+          productSelect.add(option);
+        });
+      }
+    }
+
+    window.onload = loadPurchasedProducts;
+  </script>
+</body>
+</html>
