@@ -12,13 +12,6 @@
   <header>
     <h1>Terima Kasih</h1>
   </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="baju.html">Baju</a>
-    <a href="sepatu.html">Sepatu</a>
-    <a href="tas.html">Tas</a>
-    <a href="semuaproduk.html">Semua Produk</a>
-  </nav>
 
   <section class="thankyou-container">
     <!-- Tambahkan tanda ceklis -->
@@ -28,11 +21,32 @@
     <h2>Pesanan Anda Telah Diterima</h2>
     <p>Terima kasih atas pesanan Anda. Anda akan segera menerima email konfirmasi.</p>
     <p>Nomor Pesanan: <strong>#123456789</strong></p>
-    <a href="index.html">Kembali ke Beranda</a>
+    <!-- Tombol menuju halaman review -->
+    <a href="review.html" class="review-btn">Tulis Review</a>
   </section>
 
   <footer>
     <p>&copy; 2024 Glamora. All rights reserved.</p>
   </footer>
+
+  <style>
+    .review-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #6a1b29; /* Warna tombol yang sama dengan desain */
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .review-btn:hover {
+      background-color: #a04d71; /* Warna saat hover */
+    }
+  </style>
 </body>
 </html>
