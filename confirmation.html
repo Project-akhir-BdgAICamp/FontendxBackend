@@ -1,129 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="stylecheckout.css">
-  <title>Konfirmasi Pembayaran</title>
-  <style>
-    
-    /* Modal styling */
-    .modal {
-      display: none; 
-      position: fixed;
-      z-index: 1; 
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* background overlay */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylecheckout.css">
+    <title>Konfirmasi Pembayaran</title>
+    <style>
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
-    .modal-content {
-      background-color: white;
-      margin: 15% auto;
-      padding: 20px;
-      border-radius: 8px;
-      width: 80%;
-      max-width: 400px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
 
-    .modal-content p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
+        .modal-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
 
-    .close-btn {
-      background-color: #a04d71;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        .close-btn {
+            background-color: #a04d71;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    .close-btn:hover {
-      background-color: #6a1b29;
-    }
-  </style>
+        .close-btn:hover {
+            background-color: #6a1b29;
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <h1>Konfirmasi Pesanan</h1>
-  </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="baju.html">Baju</a>
-    <a href="sepatu.html">Sepatu</a>
-    <a href="tas.html">Tas</a>
-    <a href="semuaproduk.html">Semua Produk</a>
-  </nav>
+    <header>
+        <h1>Konfirmasi Pesanan</h1>
+    </header>
 
-  <section class="confirmation-container">
-    <h2>Detail Pesanan</h2>
-    <p>Nama: <span id="confirmName"></span></p>
-    <p>Alamat: <span id="confirmAddress"></span></p>
-    <p>Nomor Telepon: <span id="confirmPhone"></span></p>
-    <p>Metode Pengiriman: <span id="confirmShipping"></span></p>
-    <p>Metode Pembayaran: <span id="confirmPayment"></span></p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="baju.html">Baju</a>
+        <a href="sepatu.html">Sepatu</a>
+        <a href="tas.html">Tas</a>
+        <a href="semuaproduk.html">Semua Produk</a>
+    </nav>
 
-    <h2>Ringkasan Keranjang</h2>
-    <table class="cart-table">
-      <thead>
-        <tr>
-          <th>Produk</th>
-          <th>Harga</th>
-          <th>Jumlah</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody id="cartItems"></tbody>
-    </table>
+    <section class="confirmation-container">
+        <h2>Detail Pesanan</h2>
+        <p>Nama: <span id="confirmName"></span></p>
+        <p>Alamat: <span id="confirmAddress"></span></p>
+        <p>Nomor Telepon: <span id="confirmPhone"></span></p>
+        <p>Metode Pengiriman: <span id="confirmShipping"></span></p>
+        <p>Metode Pembayaran: <span id="confirmPayment"></span></p>
 
-    <h2>Upload Bukti Pembayaran</h2>
-    <input type="file" id="paymentProof" accept="image/*">
-    <button onclick="submitPayment()">Konfirmasi Pembayaran</button>
-  </section>
+        <h2>Ringkasan Keranjang</h2>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Produk</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="cartItems"></tbody>
+        </table>
 
-  <!-- Modal for confirmation -->
-  <div id="paymentModal" class="modal">
-    <div class="modal-content">
-      <p id="modalMessage">Bukti pembayaran berhasil diunggah!</p>
-      <button class="close-btn" onclick="redirectToThankYou()">Close</button>
+        <h2>Metode Pembayaran</h2>
+        <select id="paymentMethod" onchange="togglePaymentProof()">
+            <option value="automatic">Pembayaran Otomatis (Kartu Kredit/Transfer Bank)</option>
+            <option value="manual">Pembayaran Manual (Unggah Bukti Pembayaran)</option>
+        </select>
+
+        <div id="manualPaymentSection" style="display: none;">
+            <h2>Upload Bukti Pembayaran</h2>
+            <input type="file" id="paymentProof" accept="image/*">
+        </div>
+
+        <button onclick="submitPayment()">Konfirmasi Pembayaran</button>
+    </section>
+
+    <!-- Modal for confirmation -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage">Bukti pembayaran berhasil diunggah!</p>
+            <button class="close-btn" onclick="redirectToThankYou()">Close</button>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p>&copy; 2024 Glamora. All rights reserved.</p>
-  </footer>
+    <footer>
+        <p>&copy; 2024 Glamora. All rights reserved.</p>
+    </footer>
 
-  <script>
-    function getCartData() {
-      return JSON.parse(localStorage.getItem('cart')) || [];
-    }
+    <script>
+        function getCartData() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
 
-    function getShippingData() {
-      return JSON.parse(localStorage.getItem('shippingData')) || {};
-    }
+        function getShippingData() {
+            return JSON.parse(localStorage.getItem('shippingData')) || {};
+        }
 
-    function loadConfirmationData() {
-      const cartData = getCartData();
-      const shippingData = getShippingData();
-      document.getElementById('confirmName').innerText = shippingData.name;
-      document.getElementById('confirmAddress').innerText = shippingData.address;
-      document.getElementById('confirmPhone').innerText = shippingData.phone;
-      document.getElementById('confirmShipping').innerText = shippingData.shippingMethod;
-      document.getElementById('confirmPayment').innerText = shippingData.paymentMethod;
+        function loadConfirmationData() {
+            const cartData = getCartData();
+            const shippingData = getShippingData();
+            document.getElementById('confirmName').innerText = shippingData.name;
+            document.getElementById('confirmAddress').innerText = shippingData.address;
+            document.getElementById('confirmPhone').innerText = shippingData.phone;
+            document.getElementById('confirmShipping').innerText = shippingData.shippingMethod;
+            document.getElementById('confirmPayment').innerText = shippingData.paymentMethod;
 
-      const cartItems = document.getElementById('cartItems');
-      cartItems.innerHTML = '';
-      cartData.forEach(item => {
-        const priceNumber = parseFloat(item.price.replace(/[Rp. ]/g, '').replace(',', '.'));
-        const totalItem = priceNumber * item.quantity;
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            cartData.forEach(item => {
+                const priceNumber = parseFloat(item.price.replace(/[Rp. ]/g, '').replace(',', '.'));
+                const totalItem = priceNumber * item.quantity;
 
-        cartItems.innerHTML += `
+                cartItems.innerHTML += `
           <tr>
             <td><span>${item.title}</span></td>
             <td>Rp ${priceNumber.toLocaleString()}</td>
@@ -131,32 +142,48 @@
             <td>Rp ${totalItem.toLocaleString()}</td>
           </tr>
         `;
-      });
-    }
+            });
+        }
 
-    function submitPayment() {
-  const paymentProof = document.getElementById('paymentProof').files[0];
-  const modal = document.getElementById('paymentModal');
-  const modalMessage = document.getElementById('modalMessage');
+        function togglePaymentProof() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const manualPaymentSection = document.getElementById('manualPaymentSection');
 
-  if (paymentProof) {
-    // Menghapus data keranjang dari localStorage setelah pembayaran berhasil
-    localStorage.removeItem('cart');
+            if (paymentMethod === 'manual') {
+                manualPaymentSection.style.display = 'block';
+            } else {
+                manualPaymentSection.style.display = 'none';
+            }
+        }
 
-    modalMessage.innerText = 'Bukti pembayaran berhasil diunggah!';
-    modal.style.display = 'block'; // Tampilkan modal
-  } else {
-    modalMessage.innerText = 'Mohon unggah bukti pembayaran!';
-    modal.style.display = 'block'; // Tampilkan modal dengan pesan error
-  }
-}
+        function submitPayment() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const modal = document.getElementById('paymentModal');
+            const modalMessage = document.getElementById('modalMessage');
 
+            if (paymentMethod === 'manual') {
+                const paymentProof = document.getElementById('paymentProof').files[0];
+                if (paymentProof) {
+                    localStorage.removeItem('cart');
+                    modalMessage.innerText = 'Bukti pembayaran berhasil diunggah!';
+                    modal.style.display = 'block';
+                } else {
+                    modalMessage.innerText = 'Mohon unggah bukti pembayaran!';
+                    modal.style.display = 'block';
+                }
+            } else {
+                localStorage.removeItem('cart');
+                modalMessage.innerText = 'Pembayaran otomatis berhasil!';
+                modal.style.display = 'block';
+            }
+        }
 
-    function redirectToThankYou() {
-      window.location.href = 'thankyou.html';
-    }
+        function redirectToThankYou() {
+            window.location.href = 'thankyou.html';
+        }
 
-    loadConfirmationData();
-  </script>
+        loadConfirmationData();
+    </script>
 </body>
+
 </html>
