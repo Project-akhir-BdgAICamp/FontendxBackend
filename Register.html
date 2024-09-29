@@ -21,11 +21,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #6a1b29, #a04d71);
+      background: linear-gradient(135deg, #0096c7, #f9dcc4); /* Sama dengan login */
     }
 
     .register-container {
-      background-color: white;
+      background: rgba(255, 255, 255, 0.2); /* Transparan */
+      backdrop-filter: blur(10px); /* Blur efek sama dengan login */
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -35,7 +36,7 @@
     }
 
     .register-container h2 {
-      color: #6a1b29;
+      color: #352f73;
       margin-bottom: 1.5rem;
       font-size: 2rem;
     }
@@ -53,18 +54,20 @@
     .input-container label {
       position: absolute;
       top: 50%;
-      left: 10px;
+      left: 0;
       transform: translateY(-50%);
-      color: #aaa;
+      color: #352f73;
       pointer-events: none;
       transition: 0.3s;
     }
 
     .input-container input {
       width: 100%;
-      padding: 1rem 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      padding: 10px 0;
+      border: none;
+      border-bottom: 2px solid #282121; /* Hanya garis bawah */
+      background: transparent; /* Transparan */
+      color: #000; /* Teks warna putih */
       font-size: 1rem;
       outline: none;
       transition: border-color 0.3s;
@@ -76,7 +79,7 @@
 
     .input-container input:focus + label,
     .input-container input:not(:placeholder-shown) + label {
-      top: 5px;
+      top: -10px;
       font-size: 0.75rem;
       color: #a04d71;
     }
@@ -84,7 +87,7 @@
     .register-btn {
       width: 100%;
       padding: 1rem;
-      background-color: #a04d71;
+      background-color: #0077b6;
       color: white;
       border: none;
       border-radius: 8px;
@@ -94,12 +97,12 @@
     }
 
     .register-btn:hover {
-      background-color: #6a1b29;
+      background-color: #2b2123;
     }
 
     .login-link {
       margin-top: 1rem;
-      color: #6a1b29;
+      color: #352f73;
       font-size: 1rem;
       display: block;
       text-decoration: none;

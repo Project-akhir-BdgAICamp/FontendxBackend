@@ -46,7 +46,7 @@ body {
     display: inline-block;
     margin: 10px 0;
     padding: 10px 15px;
-    background-color: #a04d71;
+    background-color: #0077b6;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -54,7 +54,7 @@ body {
   }
   
   .back-button:hover {
-    background-color: #6a1b29;
+    background-color: #181113;
   }
   
   
@@ -67,7 +67,7 @@ body {
   
   button {
     padding: 10px;
-    background-color: #6a1b29;
+    background-color: #0077b6;
     color: white;
     border: none;
     border-radius: 5px;
@@ -76,7 +76,7 @@ body {
   }
   
   button:hover {
-    background-color: #a04d71;
+    background-color: #47aec3;
   }
   
   .order-history {
