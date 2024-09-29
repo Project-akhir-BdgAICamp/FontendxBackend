@@ -130,6 +130,8 @@
 
             const cartItems = document.getElementById('cartItems');
             cartItems.innerHTML = '';
+            const purchasedProducts = []; // Array untuk menyimpan produk yang dibeli
+
             cartData.forEach(item => {
                 const priceNumber = parseFloat(item.price.replace(/[Rp. ]/g, '').replace(',', '.'));
                 const totalItem = priceNumber * item.quantity;
@@ -142,7 +144,11 @@
             <td>Rp ${totalItem.toLocaleString()}</td>
           </tr>
         `;
+                purchasedProducts.push(item); // Simpan produk yang dibeli ke array
             });
+
+            // Simpan produk yang dibeli ke localStorage
+            localStorage.setItem('purchasedProducts', JSON.stringify(purchasedProducts));
         }
 
         function togglePaymentProof() {
