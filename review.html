@@ -49,14 +49,14 @@
 
   <script>
     function loadPurchasedProducts() {
-      const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+      const purchasedProducts = JSON.parse(localStorage.getItem('purchasedProducts')) || [];
       const productSelect = document.getElementById('product');
       productSelect.innerHTML = '';
 
-      if (cartData.length === 0) {
-        productSelect.innerHTML = '<option>Tidak ada produk di keranjang</option>';
+      if (purchasedProducts.length === 0) {
+        productSelect.innerHTML = '<option>Tidak ada produk yang dibeli</option>';
       } else {
-        cartData.forEach(item => {
+        purchasedProducts.forEach(item => {
           const option = document.createElement('option');
           option.value = item.title;
           option.text = item.title;
