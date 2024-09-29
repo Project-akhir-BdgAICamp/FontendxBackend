@@ -8,14 +8,14 @@
 /* Body style */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f5f5f5; /* Soft peach background */
   padding: 0;
 }
 
 /* Style untuk header */
 header {
   position: relative;
-  background: linear-gradient(135deg, #6a1b29, #a04d71);
+  background: linear-gradient(135deg, #0096c7, #f9dcc4);
   padding: 20px;
   color: white;
   text-align: center;
@@ -38,7 +38,7 @@ header {
 nav {
   display: flex;
   justify-content: center;
-  background-color: #fff;
+  background-color: #f8f8f8; /* Soft peach */
   padding: 15px 0;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -46,12 +46,12 @@ nav {
 nav a {
   margin: 0 15px;
   text-decoration: none;
-  color: #6a1b29;
+  color: #0077b6; /* Blue */
   font-weight: bold;
 }
 
 nav a:hover {
-  color: #a04d71;
+  color: #90e0ef; /* Soft blue hover effect */
 }
 
 .header-nav {
@@ -59,7 +59,6 @@ nav a:hover {
   top: 20px;
   right: 20px;
 }
-
 
 /* Banner style */
 .banner {
@@ -79,14 +78,13 @@ nav a:hover {
   border-radius: 10px;
 }
 
-
 /* Kategori style */
 .categories {
   display: flex;
   justify-content: space-around;
   margin: 40px 0;
   padding: 20px;
-  background-color: #fff;
+  background-color: #f9dcc4; /* Soft peach */
 }
 
 .category {
@@ -103,18 +101,18 @@ nav a:hover {
 
 .category h3 {
   margin-top: 10px;
-  color: #6a1b29;
+  color: #0077b6; /* Blue */
 }
 
 /* Produk unggulan */
 .featured-products {
   padding: 40px 20px;
-  background-color: #fff;
+  background-color: #f9dcc4; /* Soft peach */
   text-align: center;
 }
 
 .featured-products h2 {
-  color: #6a1b29;
+  color: #0077b6; /* Blue */
   margin-bottom: 20px;
 }
 
@@ -125,7 +123,7 @@ nav a:hover {
 }
 
 .product {
-  background-color: #f9f9f9;
+  background-color: #f9dcc4; /* Soft peach */
   width: 200px;
   margin: 20px;
   padding: 20px;
@@ -143,18 +141,18 @@ nav a:hover {
 
 .product h4 {
   margin: 15px 0;
-  color: #6a1b29;
+  color: #0077b6; /* Blue */
 }
 
 .product p {
-  color: #a04d71;
+  color: #90e0ef; /* Soft blue */
 }
 
 /* Footer style */
 footer {
   text-align: center;
   padding: 20px;
-  background-color: #6a1b29;
+  background: linear-gradient(135deg, #0096c7, #f9dcc4);
   color: white;
   margin-top: 50px;
 }
@@ -162,7 +160,7 @@ footer {
 /* Side Menu style */
 .menu-btn {
   font-size: 24px;
-  background-color: #6a1b29;
+  background-color: #0077b6; /* Blue */
   color: white;
   border: none;
   padding: 10px;
@@ -180,7 +178,7 @@ footer {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #6a1b29;
+  background-color: #0077b6; /* Blue */
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -197,7 +195,7 @@ footer {
 }
 
 .side-menu a:hover {
-  background-color: #a04d71;
+  background-color: #90e0ef; /* Soft blue */
 }
 
 .side-menu .close-btn {
@@ -214,7 +212,7 @@ footer {
 
 .search-filter {
   padding: 20px;
-  background-color: #fff;
+  background-color: #f9dcc4; /* Soft peach */
   text-align: center;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -228,13 +226,13 @@ footer {
 .search-input {
   padding: 10px;
   width: 300px;
-  border: 1px solid #ccc;
+  border: 1px solid #0077b6; /* Blue */
   border-radius: 5px;
 }
 
 .search-button {
   padding: 10px;
-  background-color: #6a1b29;
+  background-color: #0077b6; /* Blue */
   color: white;
   border: none;
   border-radius: 5px;
@@ -265,7 +263,7 @@ footer {
 select, input[type="range"] {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #0077b6; /* Blue */
   border-radius: 5px;
 }
 
@@ -279,13 +277,12 @@ input[type="range"] {
   border-radius: 5px;
 }
 
-
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 15px;
   height: 15px;
-  background: #6a1b29;
+  background: #0077b6; /* Blue */
   border-radius: 50%;
   cursor: pointer;
 }
@@ -293,12 +290,10 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-moz-range-thumb {
   width: 15px;
   height: 15px;
-  background: #6a1b29;
+  background: #0077b6; /* Blue */
   border-radius: 50%;
   cursor: pointer;
 }
-
-
 
 /* Responsif untuk layar kecil */
 @media screen and (max-width: 768px) {
