@@ -14,20 +14,20 @@ header {
 }
 
 nav {
-    background-color: #333;
+    background-color: #fff;
     padding: 10px;
     text-align: center;
 }
 
 nav a {
-    color: white;
+    color: #0077b6;
     text-decoration: none;
     margin: 0 15px;
     font-size: 18px;
 }
 
 nav a:hover {
-    color: #ff6f61;
+    color: #802921;
 }
 
 /* Products Section */
@@ -65,14 +65,14 @@ nav a:hover {
 .product h3 {
     font-size: 20px;
     margin: 15px 0;
-    color: #6a1b29; /* Warna font baru */
+    color: #181c1e; /* Warna font baru */
     text-decoration: none; /* Menghilangkan garis bawah */
 }
 
 /* Style untuk deskripsi harga produk */
 .product p {
     font-size: 16px;
-    color: #6a1b29; /* Warna font baru */
+    color: #181c1e; /* Warna font baru */
 }
 
 /* Menghilangkan garis bawah dari semua link dalam produk */
@@ -82,7 +82,7 @@ nav a:hover {
 }
 
 .product button {
-    background-color: #6a1b29;
+    background-color: #181c1e;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -94,7 +94,7 @@ nav a:hover {
 }
 
 .product button:hover {
-    background-color: #d94b45;
+    background-color: #0077b6;
 }
 
 /* Footer */

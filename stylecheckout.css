@@ -17,7 +17,7 @@ body {
 
 /* Style untuk header */
 header {
-  background: linear-gradient(135deg, #6a1b29, #a04d71);
+  background: linear-gradient(135deg, #0096c7, #f9dcc4);
   padding: 20px;
   color: white;
   text-align: center;
@@ -58,7 +58,7 @@ nav a:hover {
 .checkout-container,
 .confirmation-container,
 .thankyou-container {
-  background-color: #fff;
+  background-color: #f9dcc4;
   max-width: 600px; /* Sesuaikan ukuran dengan halaman confirmation.html */
   width: 100%;
   margin: 50px auto;
@@ -72,7 +72,7 @@ label {
   font-size: 1rem;
   display: block;
   margin-bottom: 5px;
-  color: #6a1b29;
+  color: #181c1e;
 }
 
 input[type="text"],
@@ -113,7 +113,7 @@ input[type="file"] {
 
 /* Style untuk button */
 button {
-  background-color: #6a1b29;
+  background-color: #181c1e;
   color: white;
   padding: 15px;
   border: none;
@@ -123,7 +123,7 @@ button {
 }
 
 button:hover {
-  background-color: #a04d71;
+  background-color: #0077b6;
 }
 
 /* Modal button adjustments */
@@ -282,10 +282,10 @@ footer {
 /* Tambahkan style untuk tanda ceklis */
 .checkmark {
   font-size: 4rem;
-  color: #6a1b29;
+  color: #181c1e;
   margin-bottom: 20px;
 }
 
 .checkmark i {
-  color: #6a1b29;
+  color: #181c1e;
 }

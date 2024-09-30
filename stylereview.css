@@ -50,7 +50,7 @@ body {
   
   .review-container h2 {
     text-align: center;
-    color: #6a1b29;
+    color: #181c1e;
     font-size: 22px;
   }
   
@@ -63,7 +63,7 @@ body {
   label {
     margin: 10px 0 5px;
     font-weight: bold;
-    color: #6a1b29;
+    color: #181c1e;
   }
   
   input[type="text"],
@@ -81,7 +81,7 @@ body {
   }
   
   .submit-btn {
-    background-color: #6a1b29;
+    background-color: #181c1e;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -92,7 +92,7 @@ body {
   }
   
   .submit-btn:hover {
-    background-color: #a04d71;
+    background-color: rgb(57, 57, 179);
   }
   
   footer {

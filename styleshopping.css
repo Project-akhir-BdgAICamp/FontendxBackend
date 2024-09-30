@@ -39,7 +39,7 @@ body {
   .cart-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
+    background-color: #f9dcc4;
   }
   
   .cart-table th,
@@ -50,7 +50,7 @@ body {
   }
   
   .cart-table th {
-    background-color: #ff4081;
+    background-color: #181c1e;
     color: white;
   }
   
@@ -66,7 +66,7 @@ body {
   }
   
   .cart-table td button {
-    background-color: #ff4081;
+    background-color: #181c1e;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -74,7 +74,7 @@ body {
   }
   
   .cart-table td button:hover {
-    background-color: #e6396a;
+    background-color: #0077b6;
   }
   
   /* Cart Summary */
@@ -97,7 +97,7 @@ body {
   }
   
   .checkout-btn {
-    background-color: #ff4081;
+    background-color: #181c1e;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -105,7 +105,7 @@ body {
   }
   
   .checkout-btn:hover {
-    background-color: #e6396a;
+    background-color: #0077b6;
   }
   
   /* Responsive Design */
