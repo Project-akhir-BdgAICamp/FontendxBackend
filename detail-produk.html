@@ -193,7 +193,7 @@
 
           <div class="product-actions">
             <button class="cart-btn" onclick="addToCart('${produk}')">Tambahkan ke Keranjang</button>
-            <button class="wishlist-btn">Tambahkan ke Wishlist</button>
+            <button class="wishlist-btn" onclick="addToWishlist('${produk}')">Tambahkan ke Wishlist</button>
           </div>
         </div>
       `;
@@ -226,7 +226,27 @@
       alert(`${product.title} telah ditambahkan ke keranjang!`);
       window.location.href = "shopping-cart.html";
     }
-  </script>
 
+    function addToWishlist(productId) {
+      const product = products[productId];
+
+     let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+  
+     const existingProduct = wishlist.find(item => item.title === product.title);
+
+     if (!existingProduct) {
+      wishlist.push({
+      title: product.title,
+      price: product.price,
+      image: product.image,
+     });
+
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+     alert(`${product.title} telah ditambahkan ke wishlist!`);
+     } else {
+     alert(`${product.title} sudah ada di wishlist.`);
+    }
+  }
+</script>
 </body>
 </html>

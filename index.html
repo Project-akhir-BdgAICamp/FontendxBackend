@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage - Toko Online</title>
     <link rel="stylesheet" href="styleindex.css">
-    <link rel="icon" href="glamoras.jpg" type="image/jpeg"> <!-- Tambahkan ini -->
+    <link rel="icon" href="glamoras.jpg" type="image/jpeg"> <!-- Favicon -->
     <script>
       // Cek apakah user sudah login, kalau belum redirect ke login.html
       if (!localStorage.getItem("isLoggedIn")) {
@@ -35,16 +35,18 @@
     <a href="sepatu.html">Sepatu</a>
     <a href="tas.html">Tas</a>
     <a href="semuaproduk.html">Semua Produk</a>
+    <a href="wishlist.html">Wishlist</a>
   </div>
 
- <!-- Header dengan background gradient dan logo di atasnya -->
- <header>
-  <div class="header-content">
-    <h1>.</h1>
-  </div>
-  <img src="glamora.jpg" alt="Logo Glamora" class="logo-header">
-</header>
+  <!-- Header dengan background gradient dan logo di atasnya -->
+  <header>
+    <div class="header-content">
+      <h1>.</h1>
+    </div>
+    <img src="glamora.jpg" alt="Logo Glamora" class="logo-header">
+  </header>
 
+  <!-- Navigasi -->
   <nav>
     <a href="index.html">Home</a>
     <a href="baju.html">Baju</a>
@@ -53,10 +55,12 @@
     <a href="semuaproduk.html">Semua Produk</a>
   </nav>
 
+  <!-- Banner promosi -->
   <div class="banner">
     <h1>Diskon Hingga 50%! Dapatkan Penawaran Terbaik Sekarang!</h1>
   </div>
 
+  <!-- Section untuk pencarian dan filter produk -->
   <section class="search-filter">
     <div class="search-container">
       <input type="text" placeholder="Cari produk..." class="search-input">
@@ -88,18 +92,10 @@
           <option value="l">L</option>
         </select>
       </div>
-      <div class="filter-brand">
-        <label for="brand">Merek:</label>
-        <select id="brand">
-          <option value="all">Semua</option>
-          <option value="brandA">Merek A</option>
-          <option value="brandB">Merek B</option>
-        </select>
-      </div>
     </div>
   </section>
   
-
+  <!-- Kategori produk -->
   <section class="categories">
     <div class="category">
       <a href="baju.html">
@@ -109,18 +105,19 @@
     </div>    
     <div class="category">
       <a href="sepatu.html">
-      <img src="sepatu.jpg" alt="Sepatu">
-      <h3>Sepatu</h3>
+        <img src="sepatu.jpg" alt="Sepatu">
+        <h3>Sepatu</h3>
       </a>
     </div>
     <div class="category">
       <a href="tas.html">
-      <img src="tas.jpg" alt="Tas">
-      <h3>Tas</h3>
+        <img src="tas.jpg" alt="Tas">
+        <h3>Tas</h3>
       </a>
     </div>
   </section>
 
+  <!-- Produk unggulan -->
   <section class="featured-products">
     <h2>Produk Unggulan</h2>
     <div class="product-list">
@@ -142,6 +139,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2024 Glamora. All rights reserved.</p>
   </footer>
