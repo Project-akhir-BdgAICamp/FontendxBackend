@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +10,7 @@ body, html {
 }
 
 body {
-  background: linear-gradient(135deg, #f7f3f4, #f9dcc4);
+  background: linear-gradient(135deg, #f7f3f4, #fff);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,6 +38,7 @@ nav a {
   text-decoration: none;
   color: #0077b6;
   font-weight: bold;
+  transition: color 0.3s;
 }
 
 nav a:hover {
@@ -94,8 +94,16 @@ label {
 }
 
 select, input[type="number"] {
-  padding: 5px;
+  padding: 10px;
   font-size: 1rem;
+  border: 2px solid #a04d71;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+select:hover, input[type="number"]:hover {
+  border-color: #0077b6;
 }
 
 .product-actions {
@@ -109,26 +117,111 @@ select, input[type="number"] {
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
+  color: white;
 }
 
 .cart-btn {
-  background-color: #0d1010;
-  color: white;
+  background-color: #181c1e;
 }
 
 .cart-btn:hover {
   background-color: #0077b6;
+  transform: scale(1.05);
 }
 
 .wishlist-btn {
-  background-color: #0d1010;
-  color: white;
+  background-color: #181c1e;
 }
 
 .wishlist-btn:hover {
   background-color: #0077b6;
+  transform: scale(1.05);
 }
+
+.comments-section {
+  max-width: 800px;
+  width: 100%;
+  margin-top: 40px;
+  background-color: #f9dcc4;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.comments-list {
+  margin-bottom: 20px;
+}
+
+.comment {
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border-left: 5px solid #6a1b29; /* Border kiri untuk gaya */
+}
+
+.comment::before {
+  content: "👤"; /* Bisa diganti dengan icon lain */
+  position: absolute;
+  left: -25px;
+  top: 10px;
+  font-size: 25px;
+}
+
+.comment p {
+  margin: 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.comment-time {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 5px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px; /* Tambahin jarak antara komentar dan form */
+}
+
+.comment-form textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  resize: none;
+  font-size: 1rem;
+  height: 80px; /* Ukuran tetap untuk textarea */
+  transition: border-color 0.3s; /* Efek saat fokus */
+}
+
+.comment-form textarea:focus {
+  border-color: #6a1b29; /* Warna border saat fokus */
+  outline: none; /* Menghilangkan outline default */
+}
+
+.submit-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #181c1e;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Efek transisi */
+}
+
+.submit-btn:hover {
+  background-color: #2b2123;
+  transform: scale(1.05); /* Sedikit efek zoom */
+}
+
 
 footer {
   width: 100%;
@@ -138,4 +231,32 @@ footer {
   padding: 10px;
   margin-top: auto;
 }
+.size-options, .color-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
 
+.size-btn, .color-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.size-btn:hover, .color-btn:hover {
+  transform: scale(1.05);
+}
+
+.color-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.color-btn:hover {
+  border-color: #333;
+}
