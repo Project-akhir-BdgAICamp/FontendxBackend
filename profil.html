@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profil - Toko Online</title>
-  <link rel="stylesheet" href="styleprofil.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styleindex.css">
   <script>
     // Cek apakah user sudah login, kalau belum redirect ke login.html
@@ -15,53 +16,82 @@
 </head>
 <body>
 
-  <header>
+  <header class="bg-primary text-white text-center py-4">
     <h1>Profil Pengguna</h1>
-    <a href="index.html" class="back-button">← Kembali ke Beranda</a>
+    <a href="index.html" class="btn btn-light mt-2">← Kembali ke Beranda</a>
   </header>
 
-  <section class="profile-container">
-    <div class="profile-info">
-      <h2>Informasi Akun</h2>
-      <img src="https://via.placeholder.com/150" alt="Foto Profil" class="profile-pic">
-      <p>Nama: <span id="userName">Fasya</span></p>
-      <p>Email: <span id="userEmail">fasya@example.com</span></p>
-      <p>Nomor Telepon: <span id="userPhone">0812-3456-7890</span></p>
-      <p>Alamat: <span id="userAddress">Jalan Contoh No. 123, Kota</span></p>
-    </div>
+  <section class="container my-5">
+    <div class="row">
+      <!-- Informasi Profil -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h2 class="card-title">Informasi Akun</h2>
+            <img src="https://via.placeholder.com/150" alt="Foto Profil" class="img-fluid rounded-circle mb-3">
+            <p>Nama: <span id="userName">Fasya</span></p>
+            <p>Email: <span id="userEmail">fasya@example.com</span></p>
+            <p>Nomor Telepon: <span id="userPhone">0812-3456-7890</span></p>
+            <p>Alamat: <span id="userAddress">Jalan Contoh No. 123, Kota</span></p>
+          </div>
+        </div>
+      </div>
 
-    <div class="edit-profile">
-      <h3>Edit Profil</h3>
-      <form id="editForm">
-        <label for="name">Nama:</label>
-        <input type="text" id="name" value="Fasya" required>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" value="fasya@example.com" required>
+      <!-- Edit Profil -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Edit Profil</h3>
+            <form id="editForm">
+              <div class="form-group">
+                <label for="name">Nama:</label>
+                <input type="text" class="form-control" id="name" value="Fasya" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" value="fasya@example.com" required>
+              </div>
 
-        <label for="phone">Nomor Telepon:</label>
-        <input type="text" id="phone" value="0812-3456-7890" required>
+              <div class="form-group">
+                <label for="phone">Nomor Telepon:</label>
+                <input type="text" class="form-control" id="phone" value="0812-3456-7890" required>
+              </div>
 
-        <label for="address">Alamat:</label>
-        <input type="text" id="address" value="Jalan Contoh No. 123, Kota" required>
+              <div class="form-group">
+                <label for="address">Alamat:</label>
+                <input type="text" class="form-control" id="address" value="Jalan Contoh No. 123, Kota" required>
+              </div>
 
-        <button type="submit">Simpan Perubahan</button>
-      </form>
-    </div>
+              <button type="submit" class="btn btn-primary btn-block">Simpan Perubahan</button>
+            </form>
+          </div>
+        </div>
+      </div>
 
-    <div class="order-history">
-      <h3>Riwayat Pesanan</h3>
-      <ul>
-        <li>Pesanan 1 - Status: Dikirim</li>
-        <li>Pesanan 2 - Status: Selesai</li>
-        <li>Pesanan 3 - Status: Dalam Proses</li>
-      </ul>
+      <!-- Riwayat Pesanan -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Riwayat Pesanan</h3>
+            <ul class="list-group">
+              <li class="list-group-item">Pesanan 1 - Status: Dikirim</li>
+              <li class="list-group-item">Pesanan 2 - Status: Selesai</li>
+              <li class="list-group-item">Pesanan 3 - Status: Dalam Proses</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <footer>
+  <footer class="bg-primary text-white text-center py-4">
     <p>&copy; 2024 Glamora. All rights reserved.</p>
   </footer>
+
+  <!-- Bootstrap JS dan dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

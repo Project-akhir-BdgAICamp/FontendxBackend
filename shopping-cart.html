@@ -3,26 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styleshopping.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="styleindex.css">
   <title>Keranjang Belanja</title>
 </head>
 <body>
-  <header>
+  <header class="bg-primary text-white text-center py-4">
     <h1>Keranjang Belanja</h1>
   </header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="baju.html">Baju</a>
-    <a href="sepatu.html">Sepatu</a>
-    <a href="tas.html">Tas</a>
-    <a href="semuaproduk.html">Semua Produk</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Glamora</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="baju.html">Baju</a></li>
+          <li class="nav-item"><a class="nav-link" href="sepatu.html">Sepatu</a></li>
+          <li class="nav-item"><a class="nav-link" href="tas.html">Tas</a></li>
+          <li class="nav-item"><a class="nav-link" href="semuaproduk.html">Semua Produk</a></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
-  <section class="cart-container">
-    <table class="cart-table">
-      <thead>
+  <section class="container my-4">
+    <table class="table table-striped table-bordered">
+      <thead class="table-light">
         <tr>
           <th>Produk</th>
           <th>Harga</th>
@@ -36,15 +42,14 @@
     </table>
   </section>
 
-  <section class="cart-summary">
+  <section class="container my-4">
     <h2>Ringkasan Keranjang</h2>
     <p>Total Produk: <span id="totalItems">0</span></p>
     <p>Total Harga: <span id="totalPrice">Rp 0</span></p>
-    <button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
-
+    <button class="btn btn-success" onclick="goToCheckout()">Checkout</button>
   </section>
 
-  <footer>
+  <footer class="text-center py-4">
     <p>&copy; 2024 Glamora. All rights reserved.</p>
   </footer>
 
@@ -54,47 +59,46 @@
     }
 
     function updateCart() {
-  const cartData = getCartData();
-  const cartItems = document.getElementById('cartItems');
-  const totalItems = document.getElementById('totalItems');
-  const totalPrice = document.getElementById('totalPrice');
-  let totalItemCount = 0;
-  let totalItemPrice = 0;
+      const cartData = getCartData();
+      const cartItems = document.getElementById('cartItems');
+      const totalItems = document.getElementById('totalItems');
+      const totalPrice = document.getElementById('totalPrice');
+      let totalItemCount = 0;
+      let totalItemPrice = 0;
 
-  cartItems.innerHTML = '';
+      cartItems.innerHTML = '';
 
-  if (cartData.length === 0) {
-    cartItems.innerHTML = '<tr><td colspan="5">Keranjang kosong</td></tr>';
-  } else {
-    cartData.forEach((item, index) => {
-      const priceNumber = parseFloat(item.price.replace(/[Rp. ]/g, '').replace(',', '.'));
-      const totalItem = priceNumber * item.quantity;
-      totalItemCount += item.quantity;
-      totalItemPrice += totalItem;
+      if (cartData.length === 0) {
+        cartItems.innerHTML = '<tr><td colspan="5" class="text-center">Keranjang kosong</td></tr>';
+      } else {
+        cartData.forEach((item, index) => {
+          const priceNumber = parseFloat(item.price.replace(/[Rp. ]/g, '').replace(',', '.'));
+          const totalItem = priceNumber * item.quantity;
+          totalItemCount += item.quantity;
+          totalItemPrice += totalItem;
 
-      cartItems.innerHTML += `
-        <tr>
-          <td>
-            <img src="${item.image}" alt="${item.title}" class="product-image">
-            <span>${item.title}</span>
-          </td>
-          <td>Rp ${priceNumber.toLocaleString()}</td>
-          <td>
-            <input type="number" min="1" value="${item.quantity}" onchange="changeQuantity(${index}, this.value)">
-          </td>
-          <td>Rp ${totalItem.toLocaleString()}</td>
-          <td>
-            <button onclick="removeItem(${index})">Hapus</button>
-          </td>
-        </tr>
-      `;
-    });
-  }
+          cartItems.innerHTML += `
+            <tr>
+              <td>
+                <img src="${item.image}" alt="${item.title}" class="product-image" style="width: 50px; height: auto;">
+                <span>${item.title}</span>
+              </td>
+              <td>Rp ${priceNumber.toLocaleString()}</td>
+              <td>
+                <input type="number" min="1" value="${item.quantity}" onchange="changeQuantity(${index}, this.value)" class="form-control" style="width: 70px;">
+              </td>
+              <td>Rp ${totalItem.toLocaleString()}</td>
+              <td>
+                <button class="btn btn-danger" onclick="removeItem(${index})">Hapus</button>
+              </td>
+            </tr>
+          `;
+        });
+      }
 
-  totalItems.innerText = totalItemCount;
-  totalPrice.innerText = `Rp ${totalItemPrice.toLocaleString()}`;
-}
-
+      totalItems.innerText = totalItemCount;
+      totalPrice.innerText = `Rp ${totalItemPrice.toLocaleString()}`;
+    }
 
     function changeQuantity(index, newQuantity) {
       const cartData = getCartData();
@@ -118,8 +122,6 @@
     function goToCheckout() {
       window.location.href = 'checkout.html';
     }
-
-
   </script>
 </body>
 </html>
