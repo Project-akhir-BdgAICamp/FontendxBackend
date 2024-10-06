@@ -192,8 +192,22 @@
 
   <script>
     function handleLogin() {
-      localStorage.setItem("isLoggedIn", true); // Simpan status login
-      window.location.href = "index.html"; // Arahkan ke halaman utama
+      // Ambil username dan password dari input
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Jika username mengandung "admin", maka login sebagai admin
+      if (username.toLowerCase().includes('admin')) {
+        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('role', 'admin');
+        window.location.href = 'admin-dashboard.html'; // Arahkan ke dashboard admin
+      } else {
+        // Jika user biasa
+        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('role', 'user');
+        window.location.href = 'index.html'; // Arahkan ke halaman utama
+      }
+
       return false; // Mencegah reload halaman
     }
   </script>
