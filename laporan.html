@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.closed {
+            transform: translateX(-100%);
+        }
+
+        .sidebar a {
+            color: #cfd8dc;
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+            color: #ffffff;
+        }
+
+        .sidebar .submenu a {
+            padding-left: 30px;
+            font-size: 0.9rem;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.shifted {
+            margin-left: 0;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            background-color: #343a40;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .main-content {
+                margin-left: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toggle Button -->
+    <button class="toggle-btn" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h5 class="text-center text-light">Admin Panel</h5>
+        <a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard Admin</a>
+        <a href="#products" data-toggle="collapse" data-target="#productsMenu"><i class="bi bi-grid-fill"></i> Manajemen</a>
+        <div id="productsMenu" class="collapse submenu">
+            <a href="manajemen-produk.html"><i class="bi bi-box-seam"></i> Manajemen Produk</a>
+            <a href="manajemen-pengguna.html"><i class="bi bi-people"></i> Manajemen Pengguna</a>
+            <a href="manajemen-ulasan.html"><i class="bi bi-chat-dots"></i> Manajemen Ulasan & Komentar</a>
+        </div>
+        <a href="laporan.html"><i class="bi bi-graph-up"></i> Laporan Penjualan</a>
+        <a href="setting.html"><i class="bi bi-gear"></i> Pengaturan Website</a>
+        <a href="#logout" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Log Out</a>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h2>Laporan Penjualan</h2>
+
+        <!-- Form Filter Laporan -->
+        <div class="mb-3">
+            <label for="reportType">Pilih Jenis Laporan:</label>
+            <select class="form-control" id="reportType">
+                <option value="daily">Harian</option>
+                <option value="weekly">Mingguan</option>
+                <option value="monthly">Bulanan</option>
+            </select>
+            <button class="btn btn-primary mt-2" onclick="generateReport()">Tampilkan Laporan</button>
+        </div>
+
+        <!-- Tabel Laporan Penjualan -->
+        <h4>Laporan Penjualan</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Jumlah Penjualan</th>
+                    <th>Total Pendapatan</th>
+                </tr>
+            </thead>
+            <tbody id="reportTableBody">
+                <!-- Data akan ditambahkan di sini oleh JavaScript -->
+            </tbody>
+        </table>
+
+        <!-- Trend Produk Terlaris -->
+        <h4>Tren Produk Terlaris</h4>
+        <div id="topProducts" class="mb-4">
+            <!-- Data produk terlaris akan ditampilkan di sini -->
+        </div>
+
+        <!-- Produk dengan Stok Minim -->
+        <h4>Produk dengan Stok Minim</h4>
+        <div id="lowStockProducts" class="mb-4">
+            <!-- Data produk dengan stok minim akan ditampilkan di sini -->
+        </div>
+    </div>
+
+
+    <!-- Script untuk Mengelola Produk -->
+    <script>
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            sidebar.classList.toggle('closed');
+            mainContent.classList.toggle('shifted');
+        }
+
+        function logout() {
+            // Ganti URL dengan rute logout yang sesuai
+            window.location.href = 'login.html'; // Atur URL logout sesuai rute Laravel Anda
+        }
+
+        function generateReport() {
+            const reportType = document.getElementById('reportType').value;
+            const reportTableBody = document.getElementById('reportTableBody');
+            reportTableBody.innerHTML = ''; // Reset table body
+            
+            // Simulasi data laporan (Anda bisa mengganti ini dengan data dari database)
+            const sampleData = {
+                daily: [
+                    { date: '2024-10-01', sales: 50, revenue: 100000 },
+                    { date: '2024-10-02', sales: 75, revenue: 150000 },
+                ],
+                weekly: [
+                    { date: '2024-09-30 - 2024-10-06', sales: 400, revenue: 800000 },
+                ],
+                monthly: [
+                    { date: 'Oktober 2024', sales: 1500, revenue: 3000000 },
+                ]
+            };
+
+            // Menampilkan data yang sesuai berdasarkan jenis laporan
+            sampleData[reportType].forEach(item => {
+                const row = `<tr>
+                    <td>${item.date}</td>
+                    <td>${item.sales}</td>
+                    <td>${item.revenue.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
+                </tr>`;
+                reportTableBody.innerHTML += row;
+            });
+
+            // Simulasi data produk terlaris
+            const topProductsHTML = `
+                <ul>
+                    <li>Produk A - 200 Terjual</li>
+                    <li>Produk B - 150 Terjual</li>
+                    <li>Produk C - 120 Terjual</li>
+                </ul>`;
+            document.getElementById('topProducts').innerHTML = topProductsHTML;
+
+            // Simulasi data produk dengan stok minim
+            const lowStockProductsHTML = `
+                <ul>
+                    <li>Produk X - Stok 5</li>
+                    <li>Produk Y - Stok 3</li>
+                    <li>Produk Z - Stok 1</li>
+                </ul>`;
+            document.getElementById('lowStockProducts').innerHTML = lowStockProductsHTML;
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
