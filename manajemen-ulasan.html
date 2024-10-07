@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Ulasan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.closed {
+            transform: translateX(-100%);
+        }
+
+        .sidebar a {
+            color: #cfd8dc;
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+            color: #ffffff;
+        }
+
+        .sidebar .submenu a {
+            padding-left: 30px;
+            font-size: 0.9rem;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.shifted {
+            margin-left: 0;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            background-color: #343a40;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toggle Button -->
+    <button class="toggle-btn" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h5 class="text-center text-light">Admin Panel</h5>
+        <a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard Admin</a>
+        <a href="#products" data-toggle="collapse" data-target="#productsMenu"><i class="bi bi-grid-fill"></i> Manajemen</a>
+        <div id="productsMenu" class="collapse submenu">
+            <a href="manajemen-produk.html"><i class="bi bi-box-seam"></i> Manajemen Produk</a>
+            <a href="manajemen-pengguna.html"><i class="bi bi-people"></i> Manajemen Pengguna</a>
+            <a href="manajemen-ulasan.html"><i class="bi bi-chat-dots"></i> Manajemen Ulasan & Komentar</a>
+        </div>
+        <a href="laporan.html"><i class="bi bi-graph-up"></i> Laporan Penjualan</a>
+        <a href="setting.html"><i class="bi bi-gear"></i> Pengaturan Website</a>
+        <a href="#logout" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Log Out</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Manajemen Ulasan & Komentar -->
+        <div class="card">
+            <div class="card-body">
+                <h4>Manajemen Ulasan & Komentar</h4>
+                <p>Admin dapat memoderasi ulasan dari pengguna. Setujui atau tolak ulasan yang tidak sesuai.</p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Pengguna</th>
+                            <th>Produk</th>
+                            <th>Ulasan</th>
+                            <th>Rating</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reviewList">
+                        <!-- Ulasan akan ditampilkan di sini -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal untuk Menyetujui atau Menolak Ulasan -->
+        <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reviewModalLabel">Moderasi Ulasan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Nama Pengguna:</strong> <span id="reviewUserName"></span></p>
+                        <p><strong>Produk:</strong> <span id="reviewProduct"></span></p>
+                        <p><strong>Ulasan:</strong> <span id="reviewContent"></span></p>
+                        <p><strong>Rating:</strong> <span id="reviewRating"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" onclick="rejectReview()">Tolak</button>
+                        <button type="button" class="btn btn-success" onclick="approveReview()">Setujui</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        // Data Dummy Ulasan
+        const reviews = [
+            {
+                id: 1,
+                userName: 'John Doe',
+                product: 'Produk A',
+                content: 'Produk ini sangat bagus!',
+                rating: 5,
+                status: 'Pending'
+            },
+            {
+                id: 2,
+                userName: 'Jane Smith',
+                product: 'Produk B',
+                content: 'Tidak sesuai dengan harapan.',
+                rating: 2,
+                status: 'Pending'
+            }
+        ];
+
+        let currentReviewId = null; // Simpan ID ulasan yang sedang dimoderasi
+
+        // Tampilkan ulasan di tabel
+        function loadReviews() {
+            const reviewList = document.getElementById('reviewList');
+            reviewList.innerHTML = ''; // Kosongkan tabel ulasan
+            reviews.forEach((review, index) => {
+                reviewList.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${review.userName}</td>
+                        <td>${review.product}</td>
+                        <td>${review.content}</td>
+                        <td>${review.rating}</td>
+                        <td>${review.status}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="openReviewModal(${review.id})">Moderasi</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Buka modal dengan detail ulasan
+        function openReviewModal(id) {
+            currentReviewId = id; // Simpan ID ulasan
+            const review = reviews.find(r => r.id === id);
+            document.getElementById('reviewUserName').textContent = review.userName;
+            document.getElementById('reviewProduct').textContent = review.product;
+            document.getElementById('reviewContent').textContent = review.content;
+            document.getElementById('reviewRating').textContent = review.rating;
+            $('#reviewModal').modal('show');
+        }
+
+        // Fungsi untuk menyetujui ulasan
+        function approveReview() {
+            const review = reviews.find(r => r.id === currentReviewId);
+            review.status = 'Disetujui'; // Perbarui status ulasan
+            alert('Ulasan telah disetujui.');
+            $('#reviewModal').modal('hide');
+            loadReviews(); // Muat ulang ulasan
+        }
+
+        // Fungsi untuk menolak ulasan
+        function rejectReview() {
+            const review = reviews.find(r => r.id === currentReviewId);
+            review.status = 'Ditolak'; // Perbarui status ulasan
+            alert('Ulasan telah ditolak.');
+            $('#reviewModal').modal('hide');
+            loadReviews(); // Muat ulang ulasan
+        }
+
+        // Panggil fungsi loadReviews saat halaman dimuat
+        window.onload = loadReviews;
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            sidebar.classList.toggle('closed');
+            mainContent.classList.toggle('shifted');
+        }
+
+        function logout() {
+            window.location.href = 'login.html'; // Ganti dengan URL logout yang sesuai
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
