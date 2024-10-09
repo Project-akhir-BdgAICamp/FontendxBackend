@@ -167,30 +167,30 @@
 </head>
 <body>
   <div class="login-container">
-    <img src="glamora.jpg" alt="Logo Glamora" class="logo" width="100"> <!-- Logo ditambahkan -->
-    <h2>Login</h2>
-    <form id="loginForm" onsubmit="return handleLogin()">
-      <div class="input-container">
-        <input type="text" id="username" placeholder=" " required>
-        <label for="username">Username</label>
-      </div>
-      <div class="input-container">
-        <input type="password" id="password" placeholder=" " required>
-        <label for="password">Password</label>
-      </div>
-      <button type="submit" class="login-btn">Login</button>
-    </form>
+        <img src="glamora.jpg" alt="Logo Glamora" class="logo" width="100"> <!-- Logo ditambahkan -->
+        <h2>Login</h2>
+        <form id="loginForm" method="POST" action="login.php" onsubmit="return handleLogin()">
+            <div class="input-container">
+                <input type="text" id="username" name="username" placeholder=" " required>
+                <label for="username">Username</label>
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" name="password" placeholder=" " required>
+                <label for="password">Password</label>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
 
-    <div class="register-container">
-      <p>Belum punya akun? <a href="register.html">Daftar di sini</a></p>
-    </div>
-    
-    <div class="google-login">
-      <button class="google-btn">Login dengan Google</button>
-    </div>
-  </div>
+        <div class="register-container">
+            <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p> <!-- Ubah link ke register.php -->
+        </div>
 
-  <script>
+        <div class="google-login">
+            <button type="button" class="google-btn" onclick="googleLogin()">Login dengan Google</button>
+        </div>
+    </div>
+
+  <!-- <script>
     function handleLogin() {
       // Ambil username dan password dari input
       const username = document.getElementById('username').value;
@@ -210,6 +210,6 @@
 
       return false; // Mencegah reload halaman
     }
-  </script>
+  </script> -->
 </body>
 </html>

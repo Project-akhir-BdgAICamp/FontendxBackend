@@ -142,17 +142,18 @@
   <div class="register-container">
     <img src="glamora.jpg" alt="Logo" class="logo" style="width: 100px; height: auto;"> <!-- Logo -->
     <h2>Register</h2>
-    <form id="registerForm" onsubmit="return handleRegister()">
+    <!-- Form diubah untuk mengirimkan POST ke register.php -->
+    <form id="registerForm" action="register.php" method="POST">
       <div class="input-container">
-        <input type="text" id="username" placeholder=" " required>
+        <input type="text" id="username" name="username" placeholder=" " required>
         <label for="username">Username</label>
       </div>
       <div class="input-container">
-        <input type="password" id="password" placeholder=" " required>
+        <input type="password" id="password" name="password" placeholder=" " required>
         <label for="password">Password</label>
       </div>
       <div class="input-container">
-        <input type="email" id="email" placeholder=" " required>
+        <input type="email" id="email" name="email" placeholder=" " required>
         <label for="email">Email</label>
       </div>
       <button type="submit" class="register-btn">Register</button>
@@ -161,12 +162,12 @@
     <a href="login.html" class="login-link">Sudah punya akun? Login di sini</a>
   </div>
 
-  <script>
+  <!-- <script>
     function handleRegister() {
       alert("Registrasi berhasil!");
       window.location.href = "login.html";
       return false;
     }
-  </script>
+  </script> -->
 </body>
 </html>
