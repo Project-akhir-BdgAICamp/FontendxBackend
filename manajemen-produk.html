@@ -125,33 +125,37 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="upload-product.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="productName">Nama Produk</label>
-                            <input type="text" class="form-control" id="productName" placeholder="Masukkan nama produk">
+                            <input type="text" class="form-control" id="productName" placeholder="Masukkan nama produk" name="productName" required>
                         </div>
                         <div class="form-group">
                             <label for="productCategory">Kategori</label>
-                            <input type="text" class="form-control" id="productCategory" placeholder="Masukkan kategori produk">
+                            <input type="text" class="form-control" id="productCategory" placeholder="Masukkan kategori produk" name="productCategory" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productDescription">Deskripsi</label>
+                            <input type="text" class="form-control" id="productDescription" name="productDescription" placeholder="Masukkan Deskripsi produk" required></input>
                         </div>
                         <div class="form-group">
                             <label for="productPrice">Harga</label>
-                            <input type="number" class="form-control" id="productPrice" placeholder="Masukkan harga produk">
+                            <input type="number" class="form-control" id="productPrice" placeholder="Masukkan harga produk" name="productPrice" required>
                         </div>
                         <div class="form-group">
                             <label for="productStock">Stok</label>
-                            <input type="number" class="form-control" id="productStock" placeholder="Masukkan jumlah stok produk">
+                            <input type="number" class="form-control" id="productStock" placeholder="Masukkan jumlah stok produk" name="productStock" required>
                         </div>
                         <div class="form-group">
                             <label for="productImage">Unggah Gambar Produk</label>
-                            <input type="file" class="form-control-file" id="productImage">
+                            <input type="file" class="form-control-file" id="file" name="file" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan Produk</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary">Simpan Produk</button>
-                </div>
+                </div>                
             </div>
         </div>
     </div>

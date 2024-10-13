@@ -47,4 +47,3 @@ const products = [
     `;
     productsContainer.appendChild(col);
   });
-  
