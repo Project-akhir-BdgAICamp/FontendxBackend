@@ -5,8 +5,8 @@ include 'db_connect.php';
 
 // Proses registrasi ketika form disubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username']); // Perbaiki nama field
-    $password = trim($_POST['password']); // Pastikan juga trim password
+    $username = trim($_POST['username']); 
+    $password = trim($_POST['password']); 
     $email = trim($_POST['email']);
 
     // Validasi apakah field tidak kosong
@@ -15,10 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $level = 'user';
-    if ($username === 'admin') {
-        $level = 'admin';
+    // Cek apakah username sudah ada
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        echo "Username sudah terdaftar. Silakan pilih username lain.";
+        exit();
     }
+
+    $level = ($username === 'admin') ? 'admin' : 'user';
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -31,20 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['level'] = $level;
 
         // Redirect berdasarkan level
-        if ($level === 'admin') {
-            header("Location: admin-dashboard.html");
-            exit();
-        } else {
-            header("Location: index.html");
-            exit();
-        }
+        header("Location: " . ($level === 'admin' ? 'admin-dashboard.html' : 'index.php'));
+        exit();
     } else {
-        echo "Error: " . $stmt->error; // Menampilkan error jika gagal
+        echo "Error: " . $stmt->error;
     }
 
-    $stmt->close(); // Menutup prepared statement
+    $stmt->close();
 }
 
-$conn->close(); // Menutup koneksi ke database
-ob_end_flush(); // Mengirim output ke browser
+$conn->close();
+ob_end_flush();
 ?>

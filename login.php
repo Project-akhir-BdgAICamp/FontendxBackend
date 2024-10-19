@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php';
+require 'db_connect.php'; // Menghubungkan ke database
 
 // Cek apakah form sudah disubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,26 +19,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Verifikasi password
         if (password_verify($password, $user['password'])) {
+            // Atur session untuk menandakan user sudah login
+            $_SESSION['isLoggedIn'] = true;
             $_SESSION['username'] = $user['username'];
             $_SESSION['level'] = $user['level'];
+            $_SESSION['user_id'] = $user['id']; // Simpan user_id di session
 
             // Redirect berdasarkan level user
-            if ($user['level'] === 'admin') {
-                header("Location: admin-dashboard.html");
-                exit();
-            } else {
-                header("Location: index.html");
-                exit();
-            }
+            $redirectUrl = ($user['level'] === 'admin') ? 'admin-dashboard.html' : 'index.php';
+            header("Location: $redirectUrl");
+            exit();
         } else {
-            echo "Password salah.";
+            // Password salah
+            header("Location: login.php?error=Password%20salah");
+            exit();
         }
     } else {
-        echo "Username tidak ditemukan.";
+        // Username tidak ditemukan
+        header("Location: login.php?error=Username%20tidak%20ditemukan");
+        exit();
     }
 
-    $stmt->close(); // Tutup statement
+    $stmt->close();
 }
 
-$conn->close(); // Tutup koneksi database
+$conn->close();
 ?>

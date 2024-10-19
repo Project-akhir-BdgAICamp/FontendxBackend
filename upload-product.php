@@ -1,46 +1,48 @@
 <?php
-
+session_start();
 // Tampilkan semua error (untuk debugging)
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+require 'db_connect.php';
 
-require 'db_connect.php'; // Koneksi ke database
+// Cek apakah admin sudah login
+if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'admin') {
+    echo "Anda tidak memiliki izin untuk mengupload produk.";
+    exit();
+}
+
+// Ambil user_id dari session
+$userId = $_SESSION['user_id'];
 
 $productName = $_POST['productName'];
 $productCategory = $_POST['productCategory'];
-$productDescription = $_POST['productDescription'];
 $productPrice = $_POST['productPrice'];
 $productStock = $_POST['productStock'];
 
-// Mengatur direktori tempat menyimpan gambar
+//Buat direktori file 
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["file"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-// Cek apakah file gambar atau bukan
-$check = getimagesize($_FILES["file"]["tmp_name"]);
-if ($check === false) {
+if (getimagesize($_FILES["file"]["tmp_name"]) === false) {
     die("File bukan gambar.");
 }
 
-// Pindahkan file ke folder 'uploads'
 if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
     $productImage = basename($_FILES["file"]["name"]);
+    $sql = "INSERT INTO produk (name, category, price, stock, file, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssdisi", $productName, $productCategory, $productPrice, $productStock, $productImage, $userId);
 
-    // Query untuk menyimpan data ke database
-    $sql = "INSERT INTO produk (name, category, description, price, stock, file)
-            VALUES ('$productName', '$productCategory', '$productDescription', '$productPrice', '$productStock', '$productImage')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Produk berhasil disimpan.";
+    if ($stmt->execute()) {
+        echo "<script>alert('Produk berhasil ditambahkan!'); window.location.href='manajemen-produk.php';</script>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $stmt->error;
     }
 } else {
     echo "Terjadi kesalahan saat mengunggah gambar.";
 }
 
-// Tutup koneksi
+$stmt->close();
 $conn->close();
 ?>
