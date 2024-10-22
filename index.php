@@ -97,7 +97,7 @@ $result = $conn->query($sql);
     <div id="sideMenu" class="side-menu">
         <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
         <a href="profil.html">Profil</a>
-        <a href="shopping-cart.html">Keranjang</a>
+        <a href="shopping-cart.php">Keranjang</a>
         <a href="index.php">Home</a>
         <a href="baju.php">Baju</a>
         <a href="sepatu.php">Sepatu</a>
@@ -125,7 +125,7 @@ $result = $conn->query($sql);
                     <li class="nav-item"><a class="nav-link" href="tas.php">Tas</a></li>
                     <li class="nav-item"><a class="nav-link" href="semuaproduk.php">Semua Produk</a></li>
                 </ul>
-                <a href="shopping-cart.html" class="btn btn-outline-primary ms-auto">
+                <a href="shopping-cart.php" class="btn btn-outline-primary ms-auto">
                     <img src="keranjang.jpg" alt="Keranjang" style="width: 24px; height: 24px;">
                 </a>
             </div>
@@ -212,6 +212,7 @@ $result = $conn->query($sql);
                                 <h5 class="card-title"><?php echo $row['name']; ?></h5>
                                 <p class="card-text">Rp <?php echo number_format($row['price'], 0, ',', '.'); ?></p>
                                 <a href="detail_produk.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Lihat Detail</a>
+                                <button class="btn btn-success" onclick="addToCart('<?php echo $row['id']; ?>', '<?php echo $row['name']; ?>', <?php echo $row['price']; ?>)">Tambah ke Keranjang</button>
                             </div>
                         </div>
                     </div>
@@ -224,11 +225,37 @@ $result = $conn->query($sql);
         </div>
     </section>
 
+
     <!-- Footer -->
     <footer class="text-center py-4">
         <p>&copy; 2024 Toko Online. Semua Hak Dilindungi.</p>
     </footer>
 
+    <script>
+    // Fungsi untuk menambahkan barang ke keranjang
+    function addToCart(id, name, price) {
+        const cart = getCartData();
+        
+        // Cek apakah produk sudah ada di keranjang
+        const existingItem = cart.find(item => item.id === id);
+        if (existingItem) {
+            existingItem.quantity += 1; // Jika ada, tambahkan jumlahnya
+        } else {
+            cart.push({ id, name, price, quantity: 1 }); // Jika tidak ada, tambahkan item baru
+        }
+        
+        // Simpan kembali ke localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        alert(name + " telah ditambahkan ke keranjang!"); // Memberi notifikasi kepada pengguna
+        }
+
+        // Fungsi untuk mendapatkan data keranjang dari localStorage
+        function getCartData() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
