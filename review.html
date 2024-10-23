@@ -82,17 +82,15 @@
 
     <section class="container my-4">
         <h2 class="text-center">Berikan Ulasan Anda</h2>
-        <form id="reviewForm" action="review-confirmation.html" method="GET">
+        <form id="reviewForm" action="submit-review.php" method="POST">
             <div class="mb-3">
                 <label for="orderNumber" class="form-label">Nomor Pesanan:</label>
-                <input type="text" id="orderNumber" name="orderNumber" class="form-control" value="#123456789" readonly>
+                <input type="text" id="orderNumber" name="user_id" class="form-control" value="17" readonly>
             </div>
-
             <div class="mb-3">
                 <label for="product" class="form-label">Produk yang Diulas:</label>
-                <select id="product" name="product" class="form-select"></select>
+                <input id="product" name="product_id" class="form-select" value="5" readonly></select>
             </div>
-
             <div class="mb-3">
                 <label class="form-label">Rating:</label>
                 <div class="rating">
@@ -108,14 +106,12 @@
                     <label for="star1" title="1 star">&#9733;</label>
                 </div>
             </div>
-
             <div class="mb-3">
                 <label for="review" class="form-label">Ulasan Anda:</label>
-                <textarea id="review" name="review" class="form-control" rows="5" placeholder="Tulis ulasan Anda di sini..." required></textarea>
+                <textarea id="review" name="review_text" class="form-control" rows="5" placeholder="Tulis ulasan Anda di sini..." required></textarea>
             </div>
-
             <button type="submit" class="submit-btn">Kirim Ulasan</button>
-        </form>
+        </form>        
     </section>
 
     <footer class="text-center">
