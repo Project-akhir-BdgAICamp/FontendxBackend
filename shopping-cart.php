@@ -121,12 +121,12 @@
       displayCartItems();
   </script>
 
-  <!-- <section class="container my-4">
-    <h2>Ringkasan Keranjang</h2>
+  <section class="container my-4">
+    <!-- <h2>Ringkasan Keranjang</h2>
     <p>Total Produk: <span id="totalItems">0</span></p>
-    <p>Total Harga: <span id="totalPrice">Rp 0</span></p>
+    <p>Total Harga: <span id="totalPrice">Rp 0</span></p> -->
     <button class="btn btn-success" onclick="goToCheckout()">Checkout</button>
-  </section> -->
+  </section>
 
   <footer class="text-center py-4">
     <p>&copy; 2024 Glamora. All rights reserved.</p>
