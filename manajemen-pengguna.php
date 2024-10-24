@@ -43,7 +43,7 @@ $totalUsers = $result->num_rows;
             <a href="manajemen-pengguna.php"><i class="bi bi-people"></i> Manajemen Pengguna</a>
             <a href="manajemen-ulasan.html"><i class="bi bi-chat-dots"></i> Manajemen Ulasan & Komentar</a>
         </div>
-        <a href="laporan.html"><i class="bi bi-graph-up"></i> Laporan Penjualan</a>
+        <a href="laporan.php"><i class="bi bi-graph-up"></i> Laporan Penjualan</a>
         <a href="setting.html"><i class="bi bi-gear"></i> Pengaturan Website</a>
         <a href="#logout" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Log Out</a>
     </div>

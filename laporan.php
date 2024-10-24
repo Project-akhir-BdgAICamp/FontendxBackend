@@ -43,22 +43,6 @@
             background-color: #343a40;
             color: white;
         }
-        /* Responsif */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-            .main-content {
-                margin-left: 200px;
-            }
-        }
-        /* Grafik */
-        .chart-container {
-            position: relative;
-            height: 40vh;
-            width: 80vw;
-        }
-        /* Tabel */
         table {
             width: 100%;
             margin-top: 20px;
@@ -100,67 +84,60 @@
                 <p>Jumlah penjualan bulan ini.</p>
             </div>
         </div>
-        <!-- Produk Paling Laku -->
-        <div class="card mb-3">
-            <div class="card-header">
-                <h5>Produk Paling Laku</h5>
-            </div>
-            <div class="card-body">
-                <ul>
-                    <li>Cardigan Cewek - 200 Terjual</li>
-                    <li>Sepatu Sneakers Cowok - 180 Terjual</li>
-                    <li>Tas Ransel Cowok - 150 Terjual</li>
-                    <li>Jaket Kulit Cowok - 120 Terjual</li>
-                    <li>Kemeja Formal Cowok - 100 Terjual</li>
-                </ul>
-            </div>
-        </div>
         <!-- Tabel Laporan Penjualan -->
         <div class="card mb-3">
             <div class="card-header">
-                <h5>Rincian Penjualan</h5>
+                <h5>Rincian Checkout</h5>
             </div>
             <div class="card-body">
                 <table>
                     <thead>
                         <tr>
-                            <th>Produk</th>
-                            <th>Jumlah Terjual</th>
-                            <th>Harga Satuan</th>
-                            <th>Total Penjualan</th>
+                            <th>ID</th>
+                            <th>User ID</th>
+                            <th>Produk ID</th>
+                            <th>Alamat</th>
+                            <th>Telepon</th>
+                            <th>Metode Pengiriman</th>
+                            <th>Metode Pembayaran</th>
+                            <th>File</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Cardigan Cewek</td>
-                            <td>200</td>
-                            <td>Rp. 250.000</td>
-                            <td>Rp. 30.000.000</td>
-                        </tr>
-                        <tr>
-                            <td>Sepatu Sneakers Cowok</td>
-                            <td>180</td>
-                            <td>Rp. 500.000</td>
-                            <td>Rp. 54.000.000</td>
-                        </tr>
-                        <tr>
-                            <td>Tas Ransel Cowok</td>
-                            <td>150</td>
-                            <td>Rp. 350.000</td>
-                            <td>Rp. 30.000.000</td>
-                        </tr>
-                        <tr>
-                            <td>Jaket Kulit Cowok</td>
-                            <td>120</td>
-                            <td>Rp. 400.000</td>
-                            <td>Rp. 60.000.000</td>
-                        </tr>
-                        <tr>
-                            <td>Kemeja Formal Cowok</td>
-                            <td>100</td>
-                            <td>Rp. 250.000</td>
-                            <td>Rp. 25.000.000</td>
-                        </tr>
+                        <?php
+                        // Koneksi ke Database
+                        $conn = new mysqli("localhost", "root", "", "db_toko");
+
+                        // Cek koneksi
+                        if ($conn->connect_error) {
+                            die("Koneksi gagal: " . $conn->connect_error);
+                        }
+
+                        // Ambil data dari tabel checkout
+                        $sql = "SELECT * FROM checkout";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // Tampilkan data setiap baris
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["id"] . "</td>";
+                                echo "<td>" . $row["user_id"] . "</td>";
+                                echo "<td>" . $row["product_id"] . "</td>";
+                                echo "<td>" . $row["alamat"] . "</td>";
+                                echo "<td>" . $row["telephone"] . "</td>";
+                                echo "<td>" . $row["metode_pengiriman"] . "</td>";
+                                echo "<td>" . $row["metode_pembayaran"] . "</td>";
+                                echo "<td><a href='download.php?file=" . urlencode($row['file']) . "'>Download File</a></td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='7'>Tidak ada data checkout</td></tr>";
+                        }
+
+                        // Tutup koneksi
+                        $conn->close();
+                        ?>
                     </tbody>
                 </table>
             </div>

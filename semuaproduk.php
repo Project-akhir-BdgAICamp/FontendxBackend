@@ -49,55 +49,59 @@
     </div>
   </nav>
 
-<!-- Products Section -->
-<section class="container my-5">
-    <div class="row">
-        <?php
-        include 'db_connect.php';
-        $sql = "SELECT * FROM produk";
-        $result = $conn->query($sql);
+  <!-- Products Section -->
+  <!-- Products Section -->
+  <section class="container my-5">
+      <div class="row">
+          <?php
+          include 'db_connect.php';
+          $sql = "SELECT * FROM produk";
+          $result = $conn->query($sql);
 
-        if ($result === false) {
-            echo "Error: " . $conn->error;
-        } elseif ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                // Menghitung persentase stok
-                $stokPersentase = ($row['stock'] / 100) * 100; // Asumsi stok maksimum adalah 100
-                echo "<div class='col-md-4 mb-4'>
-                        <div class='card h-100 shadow-sm'>
-                            <img src='uploads/{$row['file']}' class='card-img-top' alt='{$row['name']}'>
-                            <div class='card-body text-center'>
-                                <h5 class='card-title'>{$row['name']}</h5>
-                                <p class='card-text'>Rp " . number_format($row['price'], 0, ',', '.') . "</p>";
+          if ($result === false) {
+              echo "Error: " . $conn->error;
+          } elseif ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                  // Pastikan stok tidak lebih dari 100% atau kurang dari 0%
+                  $stokPersentase = min(max(($row['stock'] / 100) * 100, 0), 100); // Sesuaikan dengan jumlah stok sebenarnya
+                  
+                  echo "<div class='col-md-4 mb-4'>
+                          <div class='card h-100 shadow-sm'>
+                              <img src='uploads/" . htmlspecialchars($row['file']) . "' class='card-img-top' alt='" . htmlspecialchars($row['name']) . "'>
+                              <div class='card-body text-center'>
+                                  <h5 class='card-title'>" . htmlspecialchars($row['name']) . "</h5>
+                                  <p class='card-text'>Rp " . number_format($row['price'], 0, ',', '.') . "</p>";
 
-                // Menampilkan badge jika produk ada diskon atau status tertentu
-                if (isset($row['status']) && $row['status'] == 'diskon') {
-                    echo " <span class='badge badge-success'>Diskon</span>";
-                } elseif (isset($row['status']) && $row['status'] == 'baru') {
-                    echo " <span class='badge badge-warning'>Baru!</span>";
-                } elseif (isset($row['status']) && $row['status'] == 'best-seller') {
-                    echo " <span class='badge badge-danger'>Best Seller!</span>";
-                }
+                  // Menampilkan badge jika produk ada diskon atau status tertentu
+                  if (isset($row['status']) && $row['status'] == 'diskon') {
+                      echo " <span class='badge badge-success'>Diskon</span>";
+                  } elseif (isset($row['status']) && $row['status'] == 'baru') {
+                      echo " <span class='badge badge-warning'>Baru!</span>";
+                  } elseif (isset($row['status']) && $row['status'] == 'best-seller') {
+                      echo " <span class='badge badge-danger'>Best Seller!</span>";
+                  }
 
-                echo "</p>
-                                <a href='detail-produk.php?id={$row['id']}' class='btn btn-primary'>Lihat Detail</a>
-                            </div>
-                            <div class='card-footer'>
-                                <div class='progress'>
-                                    <div class='progress-bar' role='progressbar' style='width: {$stokPersentase}%;' aria-valuenow='{$stokPersentase}' aria-valuemin='0' aria-valuemax='100'>Stok {$stokPersentase}%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>";
-            }
-        } else {
-            echo "<p class='text-center'>Tidak ada produk yang tersedia.</p>";
-        }
+                  echo "</p>
+                                  <a href='detail-produk.php?id=" . htmlspecialchars($row['id']) . "' class='btn btn-primary'>Lihat Detail</a>
+                              </div>
+                              <div class='card-footer'>
+                                  <div class='progress'>
+                                      <div class='progress-bar' role='progressbar' style='width: {$stokPersentase}%;' aria-valuenow='{$stokPersentase}' aria-valuemin='0' aria-valuemax='100'>Stok {$stokPersentase}%</div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>";
+              }
+          } else {
+              echo "<p class='text-center'>Tidak ada produk yang tersedia.</p>";
+          }
 
-        $conn->close();
-        ?>
-    </div>
-</section>
+          $conn->close();
+          ?>
+      </div>
+  </section>
+
+
 
 
   <footer class="bg-info text-white text-center py-4">
@@ -108,5 +112,29 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="semuaproduk.js"></script>
+  <script>
+    // Fungsi untuk menambahkan barang ke keranjang
+    function addToCart(id, name, price) {
+        const cart = getCartData();
+        
+        // Cek apakah produk sudah ada di keranjang
+        const existingItem = cart.find(item => item.id === id);
+        if (existingItem) {
+            existingItem.quantity += 1; // Jika ada, tambahkan jumlahnya
+        } else {
+            cart.push({ id, name, price, quantity: 1 }); // Jika tidak ada, tambahkan item baru
+        }
+        
+        // Simpan kembali ke localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        alert(name + " telah ditambahkan ke keranjang!"); // Memberi notifikasi kepada pengguna
+        }
+
+        // Fungsi untuk mendapatkan data keranjang dari localStorage
+        function getCartData() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
+    </script>
 </body>
 </html>

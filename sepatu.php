@@ -52,50 +52,57 @@
     </div>
   </nav>
 
- <!-- Products Section -->
-  <section class="container my-5">
-      <div class="row">
-          <?php
-          include 'db_connect.php'; // Pastikan file ini benar dan terhubung dengan database
-          $sql = "SELECT * FROM produk WHERE category = 'sepatu'"; // Menampilkan hanya produk dengan kategori sepatu
-          $result = $conn->query($sql);
+ <<!-- Products Section -->
+<section class="container my-5">
+    <div class="row">
+        <?php
+        include 'db_connect.php'; // Pastikan file ini benar dan terhubung dengan database
+        $sql = "SELECT * FROM produk WHERE category = 'sepatu'"; // Menampilkan hanya produk dengan kategori sepatu
+        $result = $conn->query($sql);
 
-          if ($result === false) {
-              echo "Error: " . $conn->error;
-          } elseif ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-                  // Menampilkan setiap produk sepatu
-                  echo '<div class="col-md-4 mb-4">';
-                  echo '  <div class="card h-100 shadow-sm">';
-                  echo '      <img src="uploads/' . htmlspecialchars($row['file']) . '" class="card-img-top" alt="' . htmlspecialchars($row['name']) . '">';
-                  echo '      <div class="card-body text-center">';
-                  echo '          <h5 class="card-title">' . htmlspecialchars($row['name']) . '</h5>';
-                  echo '          <p class="card-text">Rp ' . number_format($row['price'], 0, ',', '.') . ' ';
-                  // Tambahkan badge jika produk adalah best seller atau baru
-                  if ($row['is_best_seller']) {
-                      echo '<span class="badge badge-danger">Best Seller!</span>';
-                  } elseif ($row['is_new']) {
-                      echo '<span class="badge badge-warning">Baru!</span>';
-                  } elseif ($row['discount']) {
-                      echo '<span class="badge badge-info">Diskon ' . $row['discount'] . '%</span>';
-                  }
-                  echo '</p>';
-                  echo '          <a href="detail-produk.html?produk=' . urlencode($row['name']) . '&price=' . urlencode('Rp ' . number_format($row['price'], 0, ',', '.')) . '&image=' . urlencode($row['file']) . '" class="btn btn-primary">Lihat Detail</a>';
-                  echo '      </div>';
-                  echo '      <div class="card-footer">';
-                  echo '          <div class="progress">';
-                  echo '              <div class="progress-bar" role="progressbar" style="width: ' . $row['stock'] . '%;" aria-valuenow="' . $row['stock'] . '" aria-valuemin="0" aria-valuemax="100">Stok ' . $row['stock'] . '%</div>';
-                  echo '          </div>';
-                  echo '      </div>';
-                  echo '  </div>';
-                  echo '</div>';
-              }
-          } else {
-              echo '<p>Tidak ada produk sepatu yang ditemukan.</p>';
-          }
-          ?>
-      </div>
-  </section>
+        if ($result === false) {
+            echo "Error: " . $conn->error;
+        } elseif ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                // Menampilkan setiap produk sepatu
+                echo '<div class="col-md-4 mb-4">';
+                echo '  <div class="card h-100 shadow-sm">';
+                echo '      <img src="uploads/' . htmlspecialchars($row['file']) . '" class="card-img-top" alt="' . htmlspecialchars($row['name']) . '">';
+                echo '      <div class="card-body text-center">';
+                echo '          <h5 class="card-title">' . htmlspecialchars($row['name']) . '</h5>';
+                echo '          <p class="card-text">Rp ' . number_format($row['price'], 0, ',', '.') . ' ';
+                
+                // Tambahkan badge jika produk adalah best seller, baru, atau diskon
+                if ($row['is_best_seller']) {
+                    echo '<span class="badge badge-danger">Best Seller!</span>';
+                } elseif ($row['is_new']) {
+                    echo '<span class="badge badge-warning">Baru!</span>';
+                } elseif ($row['discount']) {
+                    echo '<span class="badge badge-info">Diskon ' . $row['discount'] . '%</span>';
+                }
+                echo '</p>';
+                
+                // Tambahkan tombol Tambah ke Keranjang
+                echo '<button class="btn btn-success mt-2" onclick="addToCart(\'' . $row['id'] . '\', \'' . htmlspecialchars($row['name']) . '\', ' . $row['price'] . ')">Tambah ke Keranjang</button>';
+                
+                // Tombol Lihat Detail
+                echo '          <a href="detail-produk.html?produk=' . urlencode($row['name']) . '&price=' . urlencode('Rp ' . number_format($row['price'], 0, ',', '.')) . '&image=' . urlencode($row['file']) . '" class="btn btn-primary mt-2">Lihat Detail</a>';
+                echo '      </div>';
+                echo '      <div class="card-footer">';
+                echo '          <div class="progress">';
+                echo '              <div class="progress-bar" role="progressbar" style="width: ' . $row['stock'] . '%;" aria-valuenow="' . $row['stock'] . '" aria-valuemin="0" aria-valuemax="100">Stok ' . $row['stock'] . '%</div>';
+                echo '          </div>';
+                echo '      </div>';
+                echo '  </div>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>Tidak ada produk sepatu yang ditemukan.</p>';
+        }
+        ?>
+    </div>
+</section>
+
 
 
 
@@ -106,5 +113,29 @@
   <!-- Bootstrap JS dan dependencies -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Fungsi untuk menambahkan barang ke keranjang
+    function addToCart(id, name, price) {
+        const cart = getCartData();
+        
+        // Cek apakah produk sudah ada di keranjang
+        const existingItem = cart.find(item => item.id === id);
+        if (existingItem) {
+            existingItem.quantity += 1; // Jika ada, tambahkan jumlahnya
+        } else {
+            cart.push({ id, name, price, quantity: 1 }); // Jika tidak ada, tambahkan item baru
+        }
+        
+        // Simpan kembali ke localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        alert(name + " telah ditambahkan ke keranjang!"); // Memberi notifikasi kepada pengguna
+        }
+
+        // Fungsi untuk mendapatkan data keranjang dari localStorage
+        function getCartData() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
+    </script>
 </body>
 </html>

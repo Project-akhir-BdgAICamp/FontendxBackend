@@ -68,9 +68,9 @@
                   $stokPersentase = ($row['stock'] / 100) * 100; // Asumsi stok maksimum adalah 100
                   echo "<div class='col-md-4 mb-4'>
                           <div class='card h-100 shadow-sm'>
-                              <img src='uploads/{$row['file']}' class='card-img-top' alt='{$row['name']}'>
+                              <img src='uploads/{$row['file']}' class='card-img-top' alt='" . htmlspecialchars($row['name']) . "'>
                               <div class='card-body text-center'>
-                                  <h5 class='card-title'>{$row['name']}</h5>
+                                  <h5 class='card-title'>" . htmlspecialchars($row['name']) . "</h5>
                                   <p class='card-text'>Rp " . number_format($row['price'], 0, ',', '.') . "</p>";
 
                   // Menampilkan badge jika produk ada diskon atau status tertentu
@@ -82,8 +82,10 @@
                       echo " <span class='badge badge-danger'>Best Seller!</span>";
                   }
 
+                  // Tambahkan tombol Tambah ke Keranjang
                   echo "</p>
-                                  <a href='detail-produk.php?id={$row['id']}' class='btn btn-primary'>Lihat Detail</a>
+                                  <button class='btn btn-success mt-2' onclick=\"addToCart('{$row['id']}', '" . htmlspecialchars($row['name']) . "', {$row['price']})\">Tambah ke Keranjang</button>
+                                  <a href='detail-produk.php?id={$row['id']}' class='btn btn-primary mt-2'>Lihat Detail</a>
                               </div>
                               <div class='card-footer'>
                                   <div class='progress'>
@@ -103,6 +105,7 @@
   </section>
 
 
+
   <footer class="bg-info text-white text-center py-4">
     <p>&copy; 2024 Glamora. All rights reserved.</p>
   </footer>
@@ -110,5 +113,29 @@
   <!-- Bootstrap JS dan dependencies -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Fungsi untuk menambahkan barang ke keranjang
+    function addToCart(id, name, price) {
+        const cart = getCartData();
+        
+        // Cek apakah produk sudah ada di keranjang
+        const existingItem = cart.find(item => item.id === id);
+        if (existingItem) {
+            existingItem.quantity += 1; // Jika ada, tambahkan jumlahnya
+        } else {
+            cart.push({ id, name, price, quantity: 1 }); // Jika tidak ada, tambahkan item baru
+        }
+        
+        // Simpan kembali ke localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        alert(name + " telah ditambahkan ke keranjang!"); // Memberi notifikasi kepada pengguna
+        }
+
+        // Fungsi untuk mendapatkan data keranjang dari localStorage
+        function getCartData() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
+    </script>
 </body>
 </html>

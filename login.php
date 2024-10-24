@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id']; // Simpan user_id di session
 
             // Redirect berdasarkan level user
-            $redirectUrl = ($user['level'] === 'admin') ? 'admin-dashboard.html' : 'index.php';
+            $redirectUrl = ($user['level'] === 'admin') ? 'admin-dashboard.php' : 'index.php';
             header("Location: $redirectUrl");
             exit();
         } else {

@@ -211,7 +211,7 @@ $result = $conn->query($sql);
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $row['name']; ?></h5>
                                 <p class="card-text">Rp <?php echo number_format($row['price'], 0, ',', '.'); ?></p>
-                                <a href="detail_produk.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Lihat Detail</a>
+                                <a href="detail-produk.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Lihat Detail</a>
                                 <button class="btn btn-success" onclick="addToCart('<?php echo $row['id']; ?>', '<?php echo $row['name']; ?>', <?php echo $row['price']; ?>)">Tambah ke Keranjang</button>
                             </div>
                         </div>

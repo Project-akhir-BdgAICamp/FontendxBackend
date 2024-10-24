@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['level'] = $level;
 
         // Redirect berdasarkan level
-        header("Location: " . ($level === 'admin' ? 'admin-dashboard.html' : 'index.php'));
+        header("Location: " . ($level === 'admin' ? 'admin-dashboard.html' : 'login.html'));
         exit();
     } else {
         echo "Error: " . $stmt->error;

@@ -18,7 +18,7 @@ if (isset($_POST['user_id'], $_POST['product_id'], $_POST['rating'], $_POST['rev
     $stmt->bind_param("iiis", $user_id, $product_id, $rating, $review_text);
 
     if ($stmt->execute()) {
-        echo "Review berhasil dikirim!";
+        echo "<script>alert('Terima kasih atas ulasanmu! Akan kami jadikan evaluasi untuk ke depannya ;)'); window.location.href='index.php';</script>";
     } else {
         echo "Error: " . $stmt->error;
     }
