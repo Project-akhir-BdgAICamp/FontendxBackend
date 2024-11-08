@@ -69,14 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="index.php">Glamora</a>
+            <a class="navbar-brand" href="index.php">Home</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="baju.php">Baju</a></li>
                     <li class="nav-item"><a class="nav-link" href="sepatu.php">Sepatu</a></li>
                     <li class="nav-item"><a class="nav-link" href="tas.php">Tas</a></li>
                     <li class="nav-item"><a class="nav-link" href="semuaproduk.php">Semua Produk</a></li>
-                    <li class="nav-item"><button class="btn btn-danger" onclick="logout()">Logout</button></li>
                 </ul>
             </div>
         </div>
@@ -132,9 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </section>
 
-    <footer class="text-center py-4">
+    <!-- <footer class="text-center py-4">
         <p>&copy; 2024 Glamora. All rights reserved.</p>
-    </footer>
+    </footer> -->
 
     <script>
         // Fungsi untuk menampilkan produk di keranjang

@@ -14,7 +14,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="index.php">Glamora</a>
+      <a class="navbar-brand" href="index.php">Home</a>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="baju.php">Baju</a></li>
@@ -128,9 +128,9 @@
     <button class="btn btn-success" onclick="goToCheckout()">Checkout</button>
   </section>
 
-  <footer class="text-center py-4">
+  <!-- <footer class="text-center py-4">
     <p>&copy; 2024 Glamora. All rights reserved.</p>
-  </footer>
+  </footer> -->
 
   <script>
     function goToCheckout() {

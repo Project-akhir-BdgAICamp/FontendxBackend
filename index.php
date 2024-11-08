@@ -90,26 +90,32 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
-    <!-- Tombol menu -->
-    <button class="btn btn-primary m-3" onclick="toggleMenu()">☰ Menu</button>
+    <header>
+        <div class="container-header"><!-- Tombol menu -->
+            <button class="btn btn-primary m-3" onclick="toggleMenu()">☰ Menu</button>
 
-    <!-- Side menu -->
-    <div id="sideMenu" class="side-menu">
-        <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
-        <a href="profil.html">Profil</a>
-        <a href="shopping-cart.php">Keranjang</a>
-        <a href="index.php">Home</a>
-        <a href="baju.php">Baju</a>
-        <a href="sepatu.php">Sepatu</a>
-        <a href="tas.php">Tas</a>
-        <a href="semuaproduk.php">Semua Produk</a>
-        <a href="wishlist.html">Wishlist</a>
-    </div>
+            <!-- Side menu -->
+            <div id="sideMenu" class="side-menu">
+                <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
+                <a href="profil.html">Profil</a>
+                <a href="shopping-cart.php">Keranjang</a>
+                <a href="index.php">Home</a>
+                <a href="baju.php">Baju</a>
+                <a href="sepatu.php">Sepatu</a>
+                <a href="tas.php">Tas</a>
+                <a href="semuaproduk.php">Semua Produk</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="login.html" onclick="logout()">Logout</a>
+            </div>
 
-    <!-- Header dengan background gradient dan logo di atasnya -->
-    <header class="text-center bg-primary text-white py-5">
-        <img src="glamora.jpg" alt="Logo Glamora" class="logo-header img-fluid my-3">
+            <!-- Header dengan background gradient dan logo di atasnya -->
+            <div class="text-center  text-white py-5">
+                <img src="glamora.jpg" alt="Logo Glamora" class="logo-header img-fluid my-3">
+            </div>
+        </div>
     </header>
+    
+    
 
     <!-- Navigasi -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -232,6 +238,11 @@ $result = $conn->query($sql);
     </footer>
 
     <script>
+        function logout() {
+            if (confirm("Apakah Anda yakin ingin logout?")) {
+                window.location.href = "login.html";
+            }
+        }
     // Fungsi untuk menambahkan barang ke keranjang
     function addToCart(id, name, price) {
         const cart = getCartData();
@@ -254,6 +265,7 @@ $result = $conn->query($sql);
         function getCartData() {
             return JSON.parse(localStorage.getItem('cart')) || [];
         }
+        
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

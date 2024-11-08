@@ -36,12 +36,12 @@ $totalUsers = $result->num_rows;
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <h5 class="text-center text-light">Admin Panel</h5>
-        <a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard Admin</a>
+        <a href="admin-dashboard.php"><i class="bi bi-speedometer2"></i> Dashboard Admin</a>
         <a href="#products" data-toggle="collapse" data-target="#productsMenu"><i class="bi bi-grid-fill"></i> Manajemen</a>
         <div id="productsMenu" class="collapse submenu">
             <a href="manajemen-produk.php"><i class="bi bi-box-seam"></i> Manajemen Produk</a>
             <a href="manajemen-pengguna.php"><i class="bi bi-people"></i> Manajemen Pengguna</a>
-            <a href="manajemen-ulasan.html"><i class="bi bi-chat-dots"></i> Manajemen Ulasan & Komentar</a>
+            <a href="manajemen-ulasan.php"><i class="bi bi-chat-dots"></i> Manajemen Ulasan & Komentar</a>
         </div>
         <a href="laporan.php"><i class="bi bi-graph-up"></i> Laporan Penjualan</a>
         <a href="setting.html"><i class="bi bi-gear"></i> Pengaturan Website</a>

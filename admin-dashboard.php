@@ -9,8 +9,6 @@ ini_set('display_errors', 1);
 //     exit();
 // }
 
-// Konten khusus admin
-echo "Selamat datang di Dashboard Admin!";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,7 +98,7 @@ echo "Selamat datang di Dashboard Admin!";
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <h5 class="text-center text-light">Admin Panel</h5>
-        <a href="admin-dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard Admin</a>
+        <a href="admin-dashboard.php"><i class="bi bi-speedometer2"></i> Dashboard Admin</a>
         <a href="#products" data-toggle="collapse" data-target="#productsMenu"><i class="bi bi-grid-fill"></i> Manajemen</a>
         <div id="productsMenu" class="collapse submenu">
             <a href="manajemen-produk.php"><i class="bi bi-box-seam"></i> Manajemen Produk</a>

@@ -21,7 +21,7 @@
 <body>
 
   <!-- Jumbotron for Header -->
-  <header class="jumbotron text-center bg-warning text-dark">
+  <header class="jumbotron text-center bg-warning text-white">
     <h1 class="display-4">Kategori Sepatu</h1>
     <p class="lead">Koleksi sepatu stylish untuk berbagai aktivitas dan gaya.</p>
   </header>
@@ -53,55 +53,53 @@
   </nav>
 
  <<!-- Products Section -->
-<section class="container my-5">
-    <div class="row">
-        <?php
-        include 'db_connect.php'; // Pastikan file ini benar dan terhubung dengan database
-        $sql = "SELECT * FROM produk WHERE category = 'sepatu'"; // Menampilkan hanya produk dengan kategori sepatu
-        $result = $conn->query($sql);
+ <section class="container my-5">
+      <div class="row">
+            <?php
+              include 'db_connect.php';
+              $sql = "SELECT * FROM produk WHERE category = 'sepatu'";
+              $result = $conn->query($sql);
 
-        if ($result === false) {
-            echo "Error: " . $conn->error;
-        } elseif ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                // Menampilkan setiap produk sepatu
-                echo '<div class="col-md-4 mb-4">';
-                echo '  <div class="card h-100 shadow-sm">';
-                echo '      <img src="uploads/' . htmlspecialchars($row['file']) . '" class="card-img-top" alt="' . htmlspecialchars($row['name']) . '">';
-                echo '      <div class="card-body text-center">';
-                echo '          <h5 class="card-title">' . htmlspecialchars($row['name']) . '</h5>';
-                echo '          <p class="card-text">Rp ' . number_format($row['price'], 0, ',', '.') . ' ';
-                
-                // Tambahkan badge jika produk adalah best seller, baru, atau diskon
-                if ($row['is_best_seller']) {
-                    echo '<span class="badge badge-danger">Best Seller!</span>';
-                } elseif ($row['is_new']) {
-                    echo '<span class="badge badge-warning">Baru!</span>';
-                } elseif ($row['discount']) {
-                    echo '<span class="badge badge-info">Diskon ' . $row['discount'] . '%</span>';
-                }
-                echo '</p>';
-                
-                // Tambahkan tombol Tambah ke Keranjang
-                echo '<button class="btn btn-success mt-2" onclick="addToCart(\'' . $row['id'] . '\', \'' . htmlspecialchars($row['name']) . '\', ' . $row['price'] . ')">Tambah ke Keranjang</button>';
-                
-                // Tombol Lihat Detail
-                echo '          <a href="detail-produk.html?produk=' . urlencode($row['name']) . '&price=' . urlencode('Rp ' . number_format($row['price'], 0, ',', '.')) . '&image=' . urlencode($row['file']) . '" class="btn btn-primary mt-2">Lihat Detail</a>';
-                echo '      </div>';
-                echo '      <div class="card-footer">';
-                echo '          <div class="progress">';
-                echo '              <div class="progress-bar" role="progressbar" style="width: ' . $row['stock'] . '%;" aria-valuenow="' . $row['stock'] . '" aria-valuemin="0" aria-valuemax="100">Stok ' . $row['stock'] . '%</div>';
-                echo '          </div>';
-                echo '      </div>';
-                echo '  </div>';
-                echo '</div>';
-            }
-        } else {
-            echo '<p>Tidak ada produk sepatu yang ditemukan.</p>';
-        }
-        ?>
-    </div>
-</section>
+              if ($result === false) {
+                  echo "Error: " . $conn->error;
+              } elseif ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                      // Menghitung persentase stok
+                      $stokPersentase = ($row['stock'] / 100) * 100; // Asumsi stok maksimum adalah 100
+                      echo "<div class='col-md-4 mb-4'>
+                              <div class='card h-100 shadow-sm'>
+                                  <img src='uploads/{$row['file']}' class='card-img-top' alt='{$row['name']}'>
+                                  <div class='card-body text-center'>
+                                      <h5 class='card-title'>{$row['name']}</h5>
+                                      <p class='card-text'>Rp " . number_format($row['price'], 0, ',', '.') . "</p>";
+
+                      // Menampilkan badge jika produk ada diskon atau status tertentu
+                      if (isset($row['status']) && $row['status'] == 'diskon') {
+                          echo " <span class='badge badge-success'>Diskon</span>";
+                      } elseif (isset($row['status']) && $row['status'] == 'baru') {
+                          echo " <span class='badge badge-warning'>Baru!</span>";
+                      } elseif (isset($row['status']) && $row['status'] == 'best-seller') {
+                          echo " <span class='badge badge-danger'>Best Seller!</span>";
+                      }
+
+                      echo "</p>
+                                      <a href='detail-produk.php?id={$row['id']}' class='btn btn-primary'>Lihat Detail</a>
+                                      <button class='btn btn-success mt-2' onclick=\"addToCart('{$row['id']}', '{$row['name']}', {$row['price']})\">Tambah ke Keranjang</button>
+                                  </div>
+                                  <div class='card-footer'>
+                                      <div class='progress'>
+                                          <div class='progress-bar' role='progressbar' style='width: {$stokPersentase}%;' aria-valuenow='{$stokPersentase}' aria-valuemin='0' aria-valuemax='100'>Stok {$stokPersentase}%</div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>";
+                  }
+              } else {
+                  echo "<p class='text-center'>Tidak ada produk baju yang tersedia.</p>";
+              }
+              ?>
+      </div>
+  </section>
 
 
 
